@@ -22,15 +22,11 @@
 \examiner{Prof. Michael Weber}
 \maketitle
 
-% Außer die Titelseite soll überall rechts mehr Rand sein
-\addtolength{\hoffset}{-1cm}
-
 % einbinden der einzelnen Aufgaben und Lösungen
-\inputassignment{01-interaktionsmodell}{01-interaktionsmodell-lsg}
-\inputassignment{02-praesentation}{02-praesentation-lsg}
-
-% notwendig, damit die Punkte der letzten Aufgabe korrekt angezeigt werden
-\refstepcounter{subpoints}\label{pointsref@\theassignment}%
+\begin{assignments}
+\inputassignment{01-interaktionsmodell}
+\inputassignment{02-praesentation}
+\end{assignments}
 
 % Zusatzblätter
 \identifier{UIST 2007}

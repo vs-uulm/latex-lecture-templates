@@ -160,9 +160,9 @@
 	\definecolor{rahmengrau}{rgb}{0.9,0.9,0.9}
 
 	\vspace*{-1.5cm}
-	\includegraphics[height=1.5cm]{uulmlogo}
+	\includegraphics[height=1.5cm]{uulmlogo-coa}
 	\hfill
-	\includegraphics[height=1.5cm]{uulmlogo2}
+	\includegraphics[height=1.5cm]{uulmlogo-text}
 
 % 	\vspace{-1.0cm}
 	\small
@@ -248,7 +248,7 @@
 
 	\vspace*{0.3cm}
 
-	\textbf{Erlaubt Hilfsmittel:}
+	\textbf{Erlaubte Hilfsmittel:}
 
 	\begin{itemize}
 		\item Keine Hilfsmittel erlaubt \hspace*{7.2cm} \textbf{Viel Erfolg!}
@@ -258,7 +258,13 @@
 		\begin{minipage}{0.98\textwidth}
 			\textbf{Vom Prüfer auszufüllen:}
 
+			\ifthenelse{\totvalue{totalpoints} > 0}{
 			\makegradetable
+			}{
+			\vspace{1ex}
+			\colorbox{red}{\textbf{Neu kompilieren, um Korrekturtabelle anzuzeigen!}}
+			\vspace{1ex}
+			}
 
 			\vspace*{0.4cm}
 			\renewcommand{\arraystretch}{0.5}
@@ -301,8 +307,13 @@
 \end{picture}%
 }}
 
-% unfortunaltely doesn't work
-% \AtEndDocument{\refstepcounter{subpoints}\label{pointsref@\theassignment}}
+\newenvironment{assignments}{
+% ausser Titelseite sind alle Seiten nach links versetzt
+\addtolength{\hoffset}{-1cm}
+}{
+% notwendig, damit die Punkte der letzten Aufgabe korrekt angezeigt werden
+\refstepcounter{subpoints}\label{pointsref@\theassignment}%
+}
 
 % Solutions
 \newboolean{showsolutions}
@@ -311,11 +322,11 @@
 \theassignment:}~\textbf{#1}}}
 
 % Includes
-\newcommand\inputassignment[2]{%
-\input{#1}
+\newcommand\inputassignment[1]{%
+\input{#1.tex}
 \cleardoublepage
 \ifthenelse{\boolean{showsolutions}}{%
-\input{#2}
+\input{#1-solution.tex}
 \cleardoublepage
 }{}
 }

@@ -3,7 +3,7 @@
 \LoadClass[11pt,a4paper,oneside,titlepage]{article}
 
 \RequirePackage{geometry}
-\geometry{top=2.5cm,left=2.5cm,right=2.5cm,bottom=2cm}
+\geometry{top=2.5cm,left=2.3cm,right=2.3cm,bottom=2cm}
 % \marginparsep3mm
 % packages
 \RequirePackage{ngerman}
@@ -161,7 +161,7 @@
 
 	\vspace*{-1.5cm}
 	\includegraphics[height=1.5cm]{uulmlogo-coa}
-	\hfill
+	\hfill%\hspace*{1em}
 	\includegraphics[height=1.5cm]{uulmlogo-text}
 
 % 	\vspace{-1.0cm}
@@ -171,7 +171,7 @@
 	\end{center}
 
 	\colorbox{hellgrau}{
-		\begin{minipage}{\textwidth}
+		\begin{minipage}{\textwidth-1em}
 			\begin{center}
 				Name der Prüfung: \textbf{\@title}
 			\end{center}
@@ -187,7 +187,7 @@
 	}
 
 	\colorbox{hellgrau}{
-		\begin{minipage}{\textwidth}
+		\begin{minipage}{\textwidth-1em}
 			\textbf{Vom Prüfungsteilnehmer auszufüllen:}
 			\vspace*{0.2cm}
 
@@ -240,7 +240,7 @@
 	\setlength{\fboxrule}{0.5pt}
 	\setlength{\fboxsep}{7pt}
 	\fcolorbox{rahmengrau}{white}{
-	\begin{minipage}[c]{0.38\textwidth}
+	\begin{minipage}[c]{0.38\textwidth-1em}
 		\centering
 		Barcode
 		\vspace*{6cm}
@@ -251,11 +251,11 @@
 	\textbf{Erlaubte Hilfsmittel:}
 
 	\begin{itemize}
-		\item Keine Hilfsmittel erlaubt \hspace*{7.2cm} \textbf{Viel Erfolg!}
+		\item Keine Hilfsmittel erlaubt \hspace*{7cm} \textbf{Viel Erfolg!}
 	\end{itemize}
 
 	\colorbox{hellgrau}{
-		\begin{minipage}{0.98\textwidth}
+		\begin{minipage}{\textwidth-2em}
 			\textbf{Vom Prüfer auszufüllen:}
 
 			\ifthenelse{\totvalue{totalpoints} > 0}{

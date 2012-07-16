@@ -1,14 +1,17 @@
 #!/usr/bin/env bash
 
+EXAMPLES="exam slides"
+
 function error() {
-	echo "Please install rubber to compile."
+	echo "Please install latexmk to compile."
 	exit 1
 }
-which rubber >/dev/null || error
+which latexmk >/dev/null || error
 
-rubber --clean --pdf main
-rubber --pdf main
-
-if [ "$?" -eq 0 ]; then
-	which open >/dev/null && open main.pdf
-fi
+OLDPWD="$PWD"
+for e in $EXAMPLES; do
+	cd examples/$e/
+	latexmk -c $e >/dev/null
+	latexmk -pdf $e >/dev/null
+	cd $OLDPWD
+done

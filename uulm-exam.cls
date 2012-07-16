@@ -1,4 +1,4 @@
-\ProvidesClass{klausur}[2009/12/04 Klausur LaTeX Klasse der Uni Ulm]
+\ProvidesClass{uulm-exam}[2012/07/16 Klausur LaTeX Klasse der Uni Ulm]
 
 \LoadClass[11pt,a4paper,oneside,titlepage]{article}
 

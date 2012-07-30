@@ -1,0 +1,80 @@
+\ProvidesClass{uulm-assignment}[2009/10/28 v1.1 Assignment document class]
+% \LoadClass{article}
+
+\RequirePackage[T1]{fontenc}
+\RequirePackage{lmodern}
+\renewcommand*\familydefault{\sfdefault}
+\RequirePackage{sfmath}
+\RequirePackage{microtype}
+
+\RequirePackage{listings}
+\lstset{language=java}
+
+% \RequirePackage{tikz}
+
+\RequirePackage[ngerman]{babel}
+\RequirePackage[margin=2cm,a4paper]{geometry}
+
+\RequirePackage{graphicx}
+\graphicspath{{./}{../}{images/}}
+
+\RequirePackage[pdftex,
+	unicode=true,
+	breaklinks=true,
+	colorlinks=true,
+	linkcolor=black,
+	citecolor=black,
+	urlcolor=black]{hyperref}
+
+\renewcommand{\baselinestretch}{1.1}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{10pt}
+
+\newcommand{\assignmentno}[1]{\def\theassignmentno{#1}}
+
+\newcounter{task}
+\newcounter{subtask}[task]
+
+\renewcommand{\maketitle}{
+	\includegraphics{uulmlogo-coa}\hfill\includegraphics{uulmlogo-text}
+	\vspace{10pt}
+
+	\begin{flushright}
+	{\Large Institut f\"ur Medieninformatik}
+	\vspace{2pt}
+
+	{\Huge User Interface Software}
+	\vspace{6pt}
+	
+	Wintersemester 2011/2012\\
+	Michael Weber, Bj\"orn Wiedersheim, Stephan Tschechne
+	\end{flushright}
+	\vspace{1em}
+	
+	{\LARGE\bfseries \"Ubungsblatt \assignmentno : \@title}
+	
+	Abgabetermin: \@date
+	\vspace{1em}
+	
+}
+
+\newcommand{\task}[2]{
+\refstepcounter{task} % Hier default-inkrement, damit labels im ToC richtig
+                      % springen und subtask counter resetted werden.
+\addpenalty{\@secpenalty}%
+\addvspace{10pt}
+{\Large \textbf{Aufgabe \arabic{task}: #1}}\hfill{\normalsize (#2 Punkte)}%
+\addcontentsline{toc}{section}{A\arabic{task}: #1}
+\par
+\addvspace{5pt}
+}
+
+\newenvironment{subtask} % Teilaufgabe
+{\addtocounter{subtask}{1} % Hier manuelles Inkrement, damit keine komischen
+                           % Seitenumbrüche passieren.
+\begin{minipage}[t]{0.03\textwidth}
+\alph{subtask})
+\end{minipage}
+\begin{minipage}[t]{0.96\textwidth}
+\setlength{\parskip}{10pt}} % Am Anfang des Environments
+{\end{minipage}} % Am Ende des Environments

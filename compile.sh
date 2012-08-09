@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-EXAMPLES="exam slides"
+EXAMPLES="exam"
 
 function error() {
 	echo "Please install latexmk to compile."

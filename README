@@ -2,7 +2,6 @@ UUlm Latex Templates
 ====================
 
  * uulm-exam.cls: Exam document class
- * uulm-slides.cls: UUlm style slides
 
  * Run install.sh to install locally in your texmf.
  * Run compile.sh to compile example documents.

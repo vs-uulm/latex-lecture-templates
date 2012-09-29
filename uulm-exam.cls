@@ -117,6 +117,19 @@
 \endlrbox
 }
 
+\newsavebox{\toolsbox}
+\sbox{\toolsbox}{}
+\newenvironment{tools}{%
+\lrbox\toolsbox
+\begin{minipage}{\textwidth}
+\vspace*{0.3cm}
+\textbf{Erlaubte Hilfsmittel:}
+\par
+}{%
+\end{minipage}
+\endlrbox
+}
+
 % Korrekturtabelle
 \newcommand\makegradetable{%
 	\newcounter{tab}
@@ -261,25 +274,18 @@
 	}
 
 	\usebox{\hintsbox}
-	\hspace*{0.53cm}
+	\hspace*{0.55cm}
 	\setlength{\fboxrule}{0.5pt}
 	\setlength{\fboxsep}{7pt}
 	\fcolorbox{rahmengrau}{white}{
-	\begin{minipage}[c]{0.47\textwidth}
+	\begin{minipage}[c]{0.45\textwidth}
 		\centering
 		Barcode
 		\vspace*{6cm}
 	\end{minipage}}
 
-	\vspace*{0.3cm}
-
-	\textbf{Erlaubte Hilfsmittel:}
-
-	\begin{itemize}
-		\item Ein beidseitig handbeschriebenes DIN-A4-Blatt \hspace*{5cm} \textbf{Viel
-		Erfolg!}
-	\end{itemize}
-
+	\usebox{\toolsbox}
+	
 	\colorbox{hellgrau}{
 		\begin{minipage}{\textwidth-2em}
 			\textbf{Vom Prüfer auszufüllen:}
@@ -337,7 +343,7 @@
 % save subpoints of last assignment
 \refstepcounter{subpoints}\label{pointsref@\theassignment}%
 \refstepcounter{assignment}%
-\vspace*{0ex}\textbf{Aufgabe \arabic{assignment}:}~\textbf{#1}\hfill\emph{(\getpoints{\theassignment}\,Punkte)}%
+\vspace*{0ex}{\Large\textbf{Aufgabe \arabic{assignment}:}~\textbf{#1}}\hfill\emph{(\getpoints{\theassignment}\,Punkte)}%
 \marginpar{~~%
 \begin{picture}(30,18)(0,5)%
 \framebox(30,18){}%
@@ -420,20 +426,9 @@
 }
 
 \newcommand{\answerspace}[1]{%
-% \definecolor{line}{gray}{0.5}
 \ \vspace{1em}
 \forloop{lines}{0}{\value{lines} < #1}{%
     \ \vspace{1.2em}\\%
 }
 \ \vspace{.3em} \\
 }
-
-% \newcommand\answerspace[1]{%
-% \ifthenelse{\boolean{showsolutions}}{}{%
-% \par\nobreak\vspace{1em}
-% \begin{minipage}{0.9\textwidth}
-% \null\hfill\vspace*{#1\baselineskip}
-% \end{minipage}%
-% \par\vspace{1em}%
-% }% end else
-% }

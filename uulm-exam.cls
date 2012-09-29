@@ -28,13 +28,15 @@
 \RequirePackage{amsmath}
 \RequirePackage{totcount}
 \RequirePackage{refcount}
+\RequirePackage{xargs}
 
 \RequirePackage{forloop}
 \RequirePackage{ifthen}
 \RequirePackage{suffix}
+\RequirePackage{totpages}
 
 % sans serif font (computer modern bright)
-\RequirePackage{cmbright}
+%\RequirePackage{cmbright}
 
 \definecolor{middlegray}{rgb}{0.5,0.5,0.5}
 \definecolor{lightgray}{rgb}{0.8,0.8,0.8}
@@ -42,7 +44,7 @@
 % settings for code listings
 \lstset{
 	language=JAVA,
-	basicstyle=\ttfamily,
+	basicstyle=\tt\small,
 	keywordstyle=\bfseries,
 	stringstyle=\ttfamily,
 	commentstyle=\color{middlegray},
@@ -71,13 +73,13 @@
 
 % running headers
 \pagestyle{fancy}
-\fancyhead{}% delete the default header
+\fancyhead{\sffamily\fontsize{10pt}{10pt}\selectfont\@title \hfill \@date}% delete the default header
 % \fancyfoot{}% delete the default footer
 % page numbers
-\fancyfoot[C]{\hspace*{1.8cm}\sffamily\fontsize{10pt}{10pt}\selectfont\thepage}
+\fancyfoot[C]{\hspace*{1.8cm}\sffamily\fontsize{10pt}{10pt}\selectfont\thepage/\ref{TotPages}}
 % header for assignment sheets
-\lhead{NAME, Vorname: \hfill Matrikel-Nr.: \hspace*{5em}}
-\rfoot{}
+%\lhead{NAME, Vorname: \hfill Matrikel-Nr.: \hspace*{5em}}
+%\rfoot{}
 
 % define assignment points
 \newtotcounter{totalpoints}
@@ -98,9 +100,21 @@
 }}
 
 % modify subpoints counter without displaying a box
-\WithSuffix\newcommand\subpoints*[1]{
-\addtocounter{subpoints}{#1}
+\WithSuffix\newcommand\subpoints*[1]{\addtocounter{subpoints}{#1}
 \addtocounter{totalpoints}{#1}
+}
+
+\newsavebox{\hintsbox}
+\sbox{\hintsbox}{\null\hspace*{0.45\textwidth}}
+\newenvironment{hints}{%
+\lrbox\hintsbox
+\begin{minipage}{0.45\textwidth}
+\vspace*{0.3cm}
+\textbf{Hinweise zur Prüfung:}
+\par
+}{%
+\end{minipage}
+\endlrbox
 }
 
 % Korrekturtabelle
@@ -111,31 +125,40 @@
 
 	\ifthenelse{\totvalue{assignment} < 10}{% normal size table
 		\begin{center}
-			\begin{tabular}{*{\thenums}{|c}|}
+			\begin{tabular}{|c *{\thenums}{|c}|}
 				\hline
-				\forloop{tab}{1}{\value{tab} < \thenums}{{\small Aufg. \thetab} &}
-				\small \hspace*{-0.1cm}$\sum$\\
+				\small Aufg. & \forloop{tab}{1}{\value{tab} < \thenums}{{\thetab} &}
+				\hspace*{-0.1cm}$\sum$\\
 				\hline
-				\forloop{tab}{1}{\value{tab} < \thenums}{{\small\getpoints{\thetab}} &}{\small\gettotalpoints}\\
+				\small Punkte & \forloop{tab}{1}{\value{tab} < \thenums}{{\small\getpoints{\thetab}} &}{\small\gettotalpoints}\\
 				\hline
-				\forloop{tab}{1}{\value{tab} < \thenums}{\hspace*{0.8cm} &} \hspace*{0.8cm}\parbox[0pt][2em][c]{0cm}{} \\
+				\small Punkte & \forloop{tab}{1}{\value{tab} < \thenums}{\hspace*{0.8cm} &} \hspace*{0.8cm}\parbox[0pt][2em][c]{0cm}{} \\
 				\hline
-				\forloop{tab}{1}{\value{tab} < \thenums}{&} \parbox[0pt][2em][c]{0cm}{}\\
+				\small Zeichen & \forloop{tab}{1}{\value{tab} < \thenums}{&} \parbox[0pt][2em][c]{0cm}{}\\
+				\hline
+				& \forloop{tab}{1}{\value{tab} < \thenums}{&} \parbox[0pt][2em][c]{0cm}{}\\
+				\hline
+				& \forloop{tab}{1}{\value{tab} < \thenums}{&} \parbox[0pt][2em][c]{0cm}{}\\
 				\hline
 			\end{tabular}
 		\end{center}
 	}{ % compact size table
 		\begin{center}
-			\begin{tabular}{*{\thenums}{|c}|}
+			\begin{tabular}{|c *{\thenums}{|c}|}
 				\hline
-				\forloop{tab}{1}{\value{tab} < \thenums}{{\small \thetab} &}
+				Aufg. & \forloop{tab}{1}{\value{tab} < \thenums}{{\small \thetab} &}
 				\small \hspace*{-0.1cm}$\sum$\\
 				\hline
-				\forloop{tab}{1}{\value{tab} < \thenums}{{\small\getpoints{\thetab}} &}{\small\gettotalpoints}\\
+				Pkte & \forloop{tab}{1}{\value{tab} < \thenums}{{\small\getpoints{\thetab}} &}{\small\gettotalpoints}\\
 				\hline
-				\forloop{tab}{1}{\value{tab} < \thenums}{\hspace*{0.5cm} &} \hspace*{0.5cm}\parbox[0pt][2em][c]{0cm}{} \\
+				Pkte & \forloop{tab}{1}{\value{tab} < \thenums}{\hspace*{0.5cm} &} \hspace*{0.5cm}\parbox[0pt][2em][c]{0cm}{} \\
 				\hline
-				\forloop{tab}{1}{\value{tab} < \thenums}{&} \parbox[0pt][2em][c]{0cm}{}\\
+				\small Zeichen & \forloop{tab}{1}{\value{tab} < \thenums}{&} \parbox[0pt][2em][c]{0cm}{}\\
+				\hline
+				& \forloop{tab}{1}{\value{tab} < \thenums}{&} \parbox[0pt][2em][c]{0cm}{}\\
+				\hline
+				& \forloop{tab}{1}{\value{tab} < \thenums}{&}
+				\parbox[0pt][2em][c]{0cm}{}\\
 				\hline
 			\end{tabular}
 		\end{center}
@@ -150,14 +173,19 @@
 \newcommand\institute[1]{\xdef\@institute{#1}}
 \newcommand\examiner[1]{\xdef\@examiner{#1}}
 \newcommand\duration[1]{\xdef\@duration{#1}}
+\newcommand\advices[1]{#1}
+%booleans to alter title page
+\newboolean{showcodeword}
+\newboolean{showbonus}
 
 \renewcommand\maketitle{%
+\begin{titlepage}
 	\thispagestyle{empty}
 	% \addtolength{\voffset}{-15mm}
 
-	\definecolor{dunkelgrau}{rgb}{0.8,0.8,0.8}
-	\definecolor{hellgrau}{rgb}{0.95,0.95,0.95}
-	\definecolor{rahmengrau}{rgb}{0.9,0.9,0.9}
+	\definecolor{dunkelgrau}{rgb}{0.7,0.7,0.7}
+	\definecolor{hellgrau}{rgb}{0.85,0.85,0.85}
+	\definecolor{rahmengrau}{rgb}{0.8,0.8,0.8}
 
 	\vspace*{-1.5cm}
 	\includegraphics[height=1.5cm]{uulmlogo-coa}
@@ -167,16 +195,16 @@
 % 	\vspace{-1.0cm}
 	\small
 	\begin{center}
-		\textbf{KLAUSURDECKBLATT}
+		\Large{Klausur \textbf{\@title}}
 	\end{center}
 
 	\colorbox{hellgrau}{
 		\begin{minipage}{\textwidth-1em}
-			\begin{center}
-				Name der Prüfung: \textbf{\@title}
-			\end{center}
-
-			\renewcommand{\arraystretch}{1.5}
+% 			\begin{center}
+% 				Name der Prüfung: \textbf{\@title}
+% 			\end{center}
+% 
+% 			\renewcommand{\arraystretch}{1.5}
 			%\setlength{\tabcolsep}{10pt}
 
 			\begin{tabular}{llll}
@@ -202,12 +230,27 @@
 				\cmidrule(l){2-2}\cmidrule(l){4-4}\cmidrule(lr){6-6}
 			\end{tabular}
 
-			\begin{minipage}{.5\textwidth}
-				\vspace*{1.0cm}
-				\hrule
-				\vspace*{0.1cm}
-				\tiny Datum, Unterschrift des Prüfungsteilnehmers
-			\end{minipage}
+% 			\begin{minipage}{.5\textwidth}
+% 				\vspace*{1.0cm}
+% 				\hrule
+% 				\vspace*{0.1cm}
+% 				\tiny Datum, Unterschrift des Prüfungsteilnehmers
+% 			\end{minipage}
+			
+			\vspace{1em}
+			\ifthenelse{\boolean{showcodeword}}%
+			{\begin{tabular*}{.9\textwidth}{lll}
+				\hspace{.4\textwidth}& \hspace{.1\textwidth} & \hspace{.4\textwidth} \\
+				\cmidrule(l){1-1} \cmidrule(l){3-3}
+				\footnotesize{Datum, Unterschrift des Prüfungsteilnehmers}  & & \footnotesize{Optionales Codewort für den Aushang} \\
+			\end{tabular*}			
+			}{%
+			\begin{tabular*}{.9\textwidth}{l}
+				\hspace{.4\textwidth}\\
+				\cmidrule(l){1-1} %\cmidrule(l){3-3}
+				\footnotesize{Datum, Unterschrift des Prüfungsteilnehmers} \\
+			\end{tabular*}
+			}
 
 			\vspace*{0.3cm}
 			Hiermit erkläre ich, dass ich prüfungsfähig bin. Sollte ich nicht auf der Liste
@@ -217,30 +260,12 @@
 		\end{minipage}
 	}
 
-	\begin{minipage}{0.56\textwidth}
-		\vspace*{0.3cm}
-
-		\textbf{Hinweise zur Prüfung:}
-
-		\begin{itemize}
-			\item Schreiben Sie auf jedes Blatt \textbf{Name} und \textbf{Matrikelnummer}.
-			Bitte halten Sie Ihren Studentenausweis zur Teilnahmekontrolle bereit.
-			\item Verwenden Sie nur dokumentenechte Stifte \textbf{(kein Bleistift!)}.
-			Schreiben Sie bitte leserlich und in kurzen, verständlichen Sätzen.
-			\item Die erreichbare Punktzahl ist neben jeder Teilaufgabe angegeben, insgesamt
-			können \textbf{\gettotalpoints\ Punkte} erreicht werden. Bitte beachten Sie dies bei Ihren
-			Antworten.
-			\item Falls Ihnen der Platz auf einem Aufgabenblatt (inkl. Rückseite) nicht
-			ausreicht, verwenden Sie bitte die hinten angehängten Extrablätter und
-			kennzeichnen Sie diese entsprechend. \textbf{Antworten auf Blättern anderer Aufgaben
-			oder auf eigenen Blättern werden nicht gewertet!} Zusätzliche Blätter erhalten
-			Sie auf Anfrage von den Betreuern.
-		\end{itemize}
-	\end{minipage}\hspace*{0.53cm}
+	\usebox{\hintsbox}
+	\hspace*{0.53cm}
 	\setlength{\fboxrule}{0.5pt}
 	\setlength{\fboxsep}{7pt}
 	\fcolorbox{rahmengrau}{white}{
-	\begin{minipage}[c]{0.38\textwidth-1em}
+	\begin{minipage}[c]{0.47\textwidth}
 		\centering
 		Barcode
 		\vspace*{6cm}
@@ -251,7 +276,8 @@
 	\textbf{Erlaubte Hilfsmittel:}
 
 	\begin{itemize}
-		\item Keine Hilfsmittel erlaubt \hspace*{7cm} \textbf{Viel Erfolg!}
+		\item Ein beidseitig handbeschriebenes DIN-A4-Blatt \hspace*{5cm} \textbf{Viel
+		Erfolg!}
 	\end{itemize}
 
 	\colorbox{hellgrau}{
@@ -268,15 +294,25 @@
 
 			\vspace*{0.4cm}
 			\renewcommand{\arraystretch}{0.5}
-			\begin{tabular}{lp{.2\textwidth}p{.1\textwidth}p{.35\textwidth}}
-				\textbf{Gesamtnote:} &  &   \\
+			%Make whole table conditional as cmidrule and the colum definition dont handle ifthenelse properly
+			\ifthenelse{\boolean{showbonus}}%
+			{ \begin{tabular}{l p{.1\textwidth} l  p{.15\textwidth} p{.30\textwidth}}
+				\textbf{Note:} & & \textbf {Bonus: ja / nein}  & &  \\
+				\cmidrule(l){2-2} \cmidrule(lr){5-5}
+				& & & & \tiny Unterschrift \@examiner \\
+			\end{tabular} 
+			}{%
+			\begin{tabular}{l p{.1\textwidth} p{.1\textwidth} p{.2\textwidth}}
+				\textbf{Note:} & & &  \\
 				\cmidrule(l){2-2}\cmidrule(lr){4-4}
-				& & & \tiny Unterschrift Prüfer\\
+				& & & \footnotesize Unterschrift \@examiner \\
 			\end{tabular}
+			}
+			
 
 		\end{minipage}
 	}
-
+\end{titlepage}
 	\newpage
 }
 
@@ -297,6 +333,7 @@
 \newcounter{subpoints}[assignment]
 
 \newcommand{\assignment}[1]{%
+\cleardoublepage
 % save subpoints of last assignment
 \refstepcounter{subpoints}\label{pointsref@\theassignment}%
 \refstepcounter{assignment}%
@@ -318,25 +355,48 @@
 % Solutions
 \newboolean{showsolutions}
 \setboolean{showsolutions}{false}
-\newcommand{\solution}[1]{{\Large\color{red}\textbf{Lösung Aufgabe
-\theassignment:}~\textbf{#1}}}
 
-% Includes
-\newcommand\inputassignment[1]{%
-\input{#1.tex}
-\cleardoublepage
+% \newcommand{\checksolution}{
+% % Include or exclude solutions
+% \specialcomment{solution}{\begingroup\color{red}\textbf{Lösung}\ }{\endgroup}%
+% \specialcomment{newpagesolution}{\newpage\begingroup\color{red}\textbf{Lösung}\ }{\endgroup}%
+% %
+% \ifthenelse{\boolean{showsolutions}}{}{\excludecomment{solution}\excludecomment{newpagesolution}}%
+% }
+
+\newcounter{solutionlines}
+\def\@drawlines{false}
+\newsavebox{\solutionbox}
+\newenvironmentx{solution}[2][2=true]{
+\setcounter{solutionlines}{#1}
+\def\@drawlines{#2}
+\begin{lrbox}{\solutionbox}
+\begin{minipage}{.9\textwidth}
+\color{red}\textbf{Lösung:}
+\par
+}{
+\end{minipage}
+\end{lrbox}
 \ifthenelse{\boolean{showsolutions}}{%
-\input{#1-solution.tex}
-\cleardoublepage
-}{}
+\fbox{%
+\usebox{\solutionbox}
 }
+}{%showsolutions off
+\ifthenelse{\equal{\@drawlines}{true}}{
+\insertlines{\thesolutionlines}
+}{%else
+\answerspace{\thesolutionlines}
+}%ifthen
+}%ifthen
+}%environment
+
 
 % Zusatzblaetter
 \xdef\@identifier{UNI ULM}
 \newcommand\identifier[1]{\xdef\@identifier{#1}}
 
 \newcommand\makeemptysheet{%
-\fancyfoot{}
+%\fancyfoot{}
 \vspace*{1ex}
 \raggedright\textbf{Zusatzblatt zu Aufgabe \rule{2em}{0.5pt}:}
 \vfill
@@ -344,23 +404,36 @@
 \newpage
 }
 
-\newcommand\answerspace[1]{%
-\par\nobreak\vspace{1em}
-%\fbox{
-\begin{minipage}{0.9\textwidth}
-\null\hfill\vspace*{#1\baselineskip}
-% \ifthenelse{#1 > 5}{
-% \par
-% \null\hfill{\small\color{middlegray} Weiter auf~
-% \begin{picture}(10,10)(0,0)%
-% \framebox(10,10){}%
-% \end{picture}%
-% ~Zusatzblatt~
-% \begin{picture}(10,10)(0,0)%
-% \framebox(10,10){}%
-% \end{picture}%
-% ~Rückseite}
-% }{}
-\end{minipage}%}
-\par\vspace{1em}
+% Antworträume
+
+%% Linien
+\newcounter{lines}%
+
+\newcommand{\insertlines}[1]{%
+\definecolor{line}{gray}{0.5}
+\ \vspace{1em}
+\forloop{lines}{0}{\value{lines} < #1}{%
+    \ \vspace{.2em}\\%
+	\textcolor{line}{\rule{\linewidth}{0.4pt}}%
 }
+\ \vspace{.3em} \\
+}
+
+\newcommand{\answerspace}[1]{%
+% \definecolor{line}{gray}{0.5}
+\ \vspace{1em}
+\forloop{lines}{0}{\value{lines} < #1}{%
+    \ \vspace{1.2em}\\%
+}
+\ \vspace{.3em} \\
+}
+
+% \newcommand\answerspace[1]{%
+% \ifthenelse{\boolean{showsolutions}}{}{%
+% \par\nobreak\vspace{1em}
+% \begin{minipage}{0.9\textwidth}
+% \null\hfill\vspace*{#1\baselineskip}
+% \end{minipage}%
+% \par\vspace{1em}%
+% }% end else
+% }

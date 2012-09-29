@@ -1,0 +1,64 @@
+\documentclass{uulm-exam}
+
+\usepackage{algorithmic}
+\usepackage{tabularx}
+\usepackage{pdfpages}
+\usepackage{subfigure}
+\usepackage{hyphenat}
+\usepackage{wrapfig}
+\usepackage[weather]{ifsym}
+\usepackage{wasysym}
+\usepackage[font=bf,justification=raggedright, singlelinecheck=false]{caption}
+
+\lstset{language=JAVA,numbers=none}
+
+\setboolean{showsolutions}{false}
+% \setboolean{showsolutions}{true}
+
+\usepackage{cmbright}
+
+% Feld für Codewort für den Aushang zeigen
+\setboolean{showcodeword}{false}
+\setboolean{showbonus}{true}
+
+\newcommand{\gt}{$>$}
+\newcommand{\lt}{$<$}
+
+\begin{document}
+\title{Programmierung von Systemen}
+\date{25.09.2012}
+\institute{Institut für Verteilte Systeme}
+\duration{90 Minuten}
+\examiner{Prof. Franz J. Hauck}
+
+\begin{hints}
+\begin{itemize}
+\item Bitte prüfen Sie die Vollständigkeit Ihrer Aufgabenblätter
+(insgesamt \gettotalassignments{} Aufgaben auf  \ref{TotPages} Seiten)!
+\item Lösungen bitte nur auf die Aufgabenblätter und nicht mit Rot- oder
+Bleistift schreiben!
+\item Als Schmierzettel können die Rückseiten verwendet werden.
+Sollten sich Teile Ihrer Lösung nicht direkt bei der Aufgabe befinden, so
+kennzeichnen Sie dies bitte deutlich bei der jeweiligen Aufgabe!
+\end{itemize}
+\end{hints}
+
+\maketitle
+
+%setzen des grafikpfades
+\graphicspath{{aufgaben/img/}}
+
+% einbinden der einzelnen Aufgaben und Lösungen
+\begin{assignments}
+\input{debug-aufgabe}
+\end{assignments}
+
+% Zusatzblätter
+%\identifier{PVS 2012}
+%\makeemptysheet
+
+% JavaDoc
+%\includepdf,angle=90,nup=1x2]{API-Aufgabe-3}
+% \includepdf[pages={4,1,3,2},angle=90,nup=1x2]{coffee-javadoc}
+
+\end{document}

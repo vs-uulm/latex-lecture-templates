@@ -140,15 +140,15 @@
 		\begin{center}
 			\begin{tabular}{|c *{\thenums}{|c}|}
 				\hline
-				\small Aufg. & \forloop{tab}{1}{\value{tab} < \thenums}{{\thetab} &}
+				\small Aufgabe & \forloop{tab}{1}{\value{tab} < \thenums}{{\thetab} &}
 				\hspace*{-0.1cm}$\sum$\\
 				\hline
 				\small Punkte & \forloop{tab}{1}{\value{tab} < \thenums}{{\small\getpoints{\thetab}} &}{\small\gettotalpoints}\\
 				\hline
-				\small Punkte & \forloop{tab}{1}{\value{tab} < \thenums}{\hspace*{0.8cm} &} \hspace*{0.8cm}\parbox[0pt][2em][c]{0cm}{} \\
+				\small Erreicht & \forloop{tab}{1}{\value{tab} < \thenums}{\hspace*{0.8cm} &} \hspace*{0.8cm}\parbox[0pt][2em][c]{0cm}{} \\
 				\hline
 				\small Zeichen & \forloop{tab}{1}{\value{tab} < \thenums}{&} \parbox[0pt][2em][c]{0cm}{}\\
-				\hline
+				\noalign{\hrule height 1pt}
 				& \forloop{tab}{1}{\value{tab} < \thenums}{&} \parbox[0pt][2em][c]{0cm}{}\\
 				\hline
 				& \forloop{tab}{1}{\value{tab} < \thenums}{&} \parbox[0pt][2em][c]{0cm}{}\\
@@ -303,9 +303,9 @@
 			%Make whole table conditional as cmidrule and the colum definition dont handle ifthenelse properly
 			\ifthenelse{\boolean{showbonus}}%
 			{ \begin{tabular}{l p{.1\textwidth} l  p{.15\textwidth} p{.30\textwidth}}
-				\textbf{Note:} & & \textbf {Bonus: ja / nein}  & &  \\
+				\textbf{Note:} & & \textbf {Bonus: $\square$ ja / $\square$ nein}  & &  \\
 				\cmidrule(l){2-2} \cmidrule(lr){5-5}
-				& & & & \tiny Unterschrift \@examiner \\
+				& & & & \footnotesize Unterschrift \@examiner \\
 			\end{tabular} 
 			}{%
 			\begin{tabular}{l p{.1\textwidth} p{.1\textwidth} p{.2\textwidth}}
@@ -314,8 +314,6 @@
 				& & & \footnotesize Unterschrift \@examiner \\
 			\end{tabular}
 			}
-			
-
 		\end{minipage}
 	}
 \end{titlepage}

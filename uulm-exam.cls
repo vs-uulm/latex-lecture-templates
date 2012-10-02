@@ -1,4 +1,4 @@
-\ProvidesClass{uulm-exam}[2012/07/16 Klausur LaTeX Klasse der Uni Ulm]
+\ProvidesClass{uulm-exam}[2012/10/02 Klausur LaTeX Klasse der Uni Ulm]
 
 \LoadClass[11pt,a4paper,oneside,titlepage]{article}
 
@@ -29,6 +29,7 @@
 \RequirePackage{totcount}
 \RequirePackage{refcount}
 \RequirePackage{xargs}
+\RequirePackage{enumitem}
 
 \RequirePackage{forloop}
 \RequirePackage{ifthen}
@@ -104,14 +105,14 @@
 \addtocounter{totalpoints}{#1}
 }
 
+\newlist{hintslist}{itemize}{55}
+\setlist[hintslist]{label=--,leftmargin=*,noitemsep,topsep=0pt}
+
 \newsavebox{\hintsbox}
 \sbox{\hintsbox}{\null\hspace*{0.45\textwidth}}
 \newenvironment{hints}{%
 \lrbox\hintsbox
-\begin{minipage}{0.45\textwidth}
-\vspace*{0.3cm}
-\textbf{Hinweise zur Prüfung:}
-\par
+\begin{minipage}[t]{0.475\textwidth}
 }{%
 \end{minipage}
 \endlrbox
@@ -122,7 +123,6 @@
 \newenvironment{tools}{%
 \lrbox\toolsbox
 \begin{minipage}{\textwidth}
-\vspace*{0.3cm}
 \textbf{Erlaubte Hilfsmittel:}
 \par
 }{%
@@ -213,13 +213,6 @@
 
 	\colorbox{hellgrau}{
 		\begin{minipage}{\textwidth-1em}
-% 			\begin{center}
-% 				Name der Prüfung: \textbf{\@title}
-% 			\end{center}
-% 
-% 			\renewcommand{\arraystretch}{1.5}
-			%\setlength{\tabcolsep}{10pt}
-
 			\begin{tabular}{llll}
 				Datum und Uhrzeit: & \@date & Bearbeitungszeit: & \@duration \\
 				Institut: & \@institute & Prüfer: & \@examiner \\
@@ -243,49 +236,44 @@
 				\cmidrule(l){2-2}\cmidrule(l){4-4}\cmidrule(lr){6-6}
 			\end{tabular}
 
-% 			\begin{minipage}{.5\textwidth}
-% 				\vspace*{1.0cm}
-% 				\hrule
-% 				\vspace*{0.1cm}
-% 				\tiny Datum, Unterschrift des Prüfungsteilnehmers
-% 			\end{minipage}
-			
-			\vspace{1em}
+			\vspace*{1.5em}
+			Hiermit erkläre ich, dass ich prüfungsfähig bin. Sollte ich nicht
+			auf der Liste der angemeldeten Studierenden aufgeführt sein, dann nehme ich
+			hiermit zur Kenntnis, dass diese Prüfung nicht gewertet werden wird.
+
+			\vspace{2.5em}
+			\renewcommand{\arraystretch}{1}
 			\ifthenelse{\boolean{showcodeword}}%
 			{\begin{tabular*}{.9\textwidth}{lll}
 				\hspace{.4\textwidth}& \hspace{.1\textwidth} & \hspace{.4\textwidth} \\
 				\cmidrule(l){1-1} \cmidrule(l){3-3}
-				\footnotesize{Datum, Unterschrift des Prüfungsteilnehmers}  & & \footnotesize{Optionales Codewort für den Aushang} \\
+				\footnotesize{Unterschrift des Prüfungsteilnehmers}  & & \footnotesize{Optionales Codewort für den Aushang} \\
 			\end{tabular*}			
 			}{%
 			\begin{tabular*}{.9\textwidth}{l}
 				\hspace{.4\textwidth}\\
 				\cmidrule(l){1-1} %\cmidrule(l){3-3}
-				\footnotesize{Datum, Unterschrift des Prüfungsteilnehmers} \\
+				\footnotesize{Unterschrift des Prüfungsteilnehmers} \\
 			\end{tabular*}
 			}
-
-			\vspace*{0.3cm}
-			Hiermit erkläre ich, dass ich prüfungsfähig bin. Sollte ich nicht auf der Liste
-			der angemeldeten Studierenden aufgeführt sein, dann nehme ich hiermit zur
-			Kenntnis, dass diese Prüfung nicht gewertet werden wird.
-
 		\end{minipage}
 	}
-
+	\vfill
+	\normalsize\textbf{Hinweise zur Prüfung:}
+	\par
 	\usebox{\hintsbox}
-	\hspace*{0.55cm}
+	\hfill
 	\setlength{\fboxrule}{0.5pt}
 	\setlength{\fboxsep}{7pt}
 	\fcolorbox{rahmengrau}{white}{
-	\begin{minipage}[c]{0.45\textwidth}
+	\begin{minipage}[t]{75mm}
 		\centering
 		Barcode
-		\vspace*{6cm}
+		\vspace*{45mm}
 	\end{minipage}}
-
+	\vfill
 	\usebox{\toolsbox}
-	
+	\vfill
 	\colorbox{hellgrau}{
 		\begin{minipage}{\textwidth-2em}
 			\textbf{Vom Prüfer auszufüllen:}
@@ -308,7 +296,7 @@
 				& & & & \footnotesize Unterschrift \@examiner \\
 			\end{tabular} 
 			}{%
-			\begin{tabular}{l p{.1\textwidth} p{.1\textwidth} p{.2\textwidth}}
+			\begin{tabular}{l p{.1\textwidth} p{.4\textwidth} p{.3\textwidth}}
 				\textbf{Note:} & & &  \\
 				\cmidrule(l){2-2}\cmidrule(lr){4-4}
 				& & & \footnotesize Unterschrift \@examiner \\

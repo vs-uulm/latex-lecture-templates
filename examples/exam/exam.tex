@@ -11,8 +11,15 @@
 
 \lstset{language=Java,numbers=none}
 
+\usepackage{cmbright}
+
 \setboolean{showsolutions}{false}
 % \setboolean{showsolutions}{true}
+
+% Feld für Codewort für den Aushang zeigen
+\setboolean{showcodeword}{false}
+% Feld für Notenbonus
+\setboolean{showbonus}{true}
 
 \begin{document}
 \title{User Interface Softwaretechnologie}
@@ -20,16 +27,34 @@
 \institute{Institut für Medieninformatik}
 \duration{90 Minuten}
 \examiner{Prof. Michael Weber}
+
+\begin{hints}
+\begin{hintslist}
+\item Bitte prüfen Sie die Vollständigkeit Ihrer Aufgabenblätter
+(insgesamt \gettotalassignments{} Aufgaben auf  \ref{TotPages} Seiten)!
+\item Lösungen bitte nur auf die Aufgabenblätter und nicht mit Rot- oder
+Bleistift schreiben!
+\item Als Schmierzettel können die Rückseiten verwendet werden.
+Sollten sich Teile Ihrer Lösung nicht direkt bei der Aufgabe befinden, so
+kennzeichnen Sie dies bitte deutlich bei der jeweiligen Aufgabe!
+\end{hintslist}
+\end{hints}
+
+\begin{tools}
+Ein beidseitig handbeschriebenes DIN-A4-Blatt.
+\end{tools}
+
 \maketitle
 
 % einbinden der einzelnen Aufgaben und Lösungen
 \begin{assignments}
-\inputassignment{01-interaktionsmodell}
-\inputassignment{02-praesentation}
+\input{01-interaktionsmodell}
+\input{02-praesentation}
 \end{assignments}
 
 % Zusatzblätter
 \identifier{UIST 2007}
+\newpage
 \makeemptysheet
 \makeemptysheet
 \makeemptysheet

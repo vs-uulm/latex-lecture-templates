@@ -290,9 +290,9 @@
 			\renewcommand{\arraystretch}{0.5}
 			%Make whole table conditional as cmidrule and the colum definition dont handle ifthenelse properly
 			\ifthenelse{\boolean{showbonus}}%
-			{ \begin{tabular}{l p{.1\textwidth} l  p{.15\textwidth} p{.30\textwidth}}
-				\textbf{Note:} & & \textbf {Bonus: $\square$ ja / $\square$ nein}  & &  \\
-				\cmidrule(l){2-2} \cmidrule(lr){5-5}
+			{ \begin{tabular}{l l p{.15\textwidth} p{.1\textwidth} p{.30\textwidth}}
+				\textbf {Bonus: $\square$ ja / $\square$ nein} & \textbf{Note:} & & & \\
+				\cmidrule(l){3-3} \cmidrule(lr){5-5}
 				& & & & \footnotesize Unterschrift \@examiner \\
 			\end{tabular} 
 			}{%

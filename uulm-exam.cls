@@ -1,4 +1,4 @@
-\ProvidesClass{uulm-exam}[2012/10/02 Klausur LaTeX Klasse der Uni Ulm]
+\ProvidesClass{uulm-exam}[2013/02/21 Klausur LaTeX Klasse der Uni Ulm]
 
 \LoadClass[11pt,a4paper,oneside,titlepage]{article}
 
@@ -360,6 +360,7 @@
 \def\@drawlines{false}
 \newsavebox{\solutionbox}
 \newenvironmentx{solution}[2][2=true]{
+\par%
 \setcounter{solutionlines}{#1}
 \def\@drawlines{#2}
 \begin{lrbox}{\solutionbox}

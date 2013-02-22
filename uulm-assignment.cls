@@ -25,6 +25,10 @@
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{1em}
 
+\newboolean{nocolor}
+\DeclareOption{nocolor}{\setboolean{nocolor}{true}}
+\ProcessOptions*
+
 %% Start - Definitions for additional title page commands:
 \def\@faculty{} % default empty
 \newcommand{\faculty}[1]{
@@ -64,16 +68,30 @@
 %% End - Definitions for additional title page commands
 
 \renewcommand{\maketitle}{
+\ifthenelse{\boolean{nocolor}}{%
+\uulmlogo{black}
+}{%
 \vspace*{-2cm}
-\uulmlogo
+\uulmlogo{uulm}
+}
 \par\vspace{1.2em}
 	\noindent\hspace*{-2cm}\begin{tikzpicture}
+	\ifthenelse{\boolean{nocolor}}{%
+	\path (0,0) -- (21cm,0);% to get alignment right
+	\node[font=\huge,black,left,inner sep=0] at (19cm,0.6cm) {\@course};
+	}{%
 	\fill[uulm-in] (0,0) rectangle (21cm,1.2cm);
 	\node[font=\huge,white,left,inner sep=0] at (19cm,0.6cm) {\@course};
+	}
 	\begin{scope}[yscale=-1]
+	\ifthenelse{\boolean{nocolor}}{%
+	\node[font=\large,black,left,inner sep=0] at (19cm,0.5cm) {\@faculty{} $|$ \@semester};
+	\node[font=\large,black,left,inner sep=0] at (19cm,1.1cm) {\@supervisor};
+	}{%
 	\fill[uulm-akzent!60] (0,0) rectangle (21cm,1.6cm);
 	\node[font=\large,uulm-akzent!50!black,left,inner sep=0] at (19cm,0.5cm) {\@faculty{} $|$ \@semester};
-	\node[font=\large,uulm-akzent!50!black,left,inner sep=0] at (19cm,1.1cm) {\@supervisor};
+	\node[font=\large,uulm-akzent!50!black,left,inner sep=0] at (19cm,1.1cm) {\@supervisor};	
+	}
 	\end{scope}
 	\end{tikzpicture}
 
@@ -125,7 +143,7 @@
 % PGF commands, generated using http://sourceforge.net/projects/eps2pgf/
 % ---------------------------------------------------------------------------
 
-\newcommand\uulmlogo{
+\newcommand\uulmlogo[1]{
 \begin{pgfpicture}
 \pgftransformscale{20mm/40mm}
 \pgfpathmoveto{\pgfqpoint{0cm}{0cm}}
@@ -142,7 +160,7 @@
 \pgfpathlineto{\pgfqpoint{0cm}{4cm}}
 \pgfpathclose
 \pgfusepath{clip}
-\pgfsetstrokecolor{uulm}\pgfsetfillcolor{uulm}
+\pgfsetstrokecolor{#1}\pgfsetfillcolor{#1}
 \pgfpathmoveto{\pgfqpoint{3.307cm}{2.354cm}}
 \pgfpathcurveto{\pgfqpoint{3.292cm}{2.354cm}}{\pgfqpoint{3.279cm}{2.35cm}}{\pgfqpoint{3.268cm}{2.343cm}}
 \pgfpathcurveto{\pgfqpoint{3.205cm}{2.377cm}}{\pgfqpoint{3.132cm}{2.408cm}}{\pgfqpoint{3.05cm}{2.435cm}}
@@ -1221,7 +1239,7 @@
 \begin{pgfpicture}
 \pgftransformscale{20mm/40mm}
 \begin{pgfscope}
-\pgfsetstrokecolor{uulm}\pgfsetfillcolor{uulm}
+\pgfsetstrokecolor{#1}\pgfsetfillcolor{#1}
 \pgfpathmoveto{\pgfqpoint{11.814cm}{3.481cm}}
 \pgfpathlineto{\pgfqpoint{11.751cm}{3.481cm}}
 \pgfpathlineto{\pgfqpoint{11.751cm}{3.199cm}}
@@ -1665,5 +1683,5 @@
 \pgfpathlineto{\pgfqpoint{10.566cm}{3.481cm}}
 \pgfusepath{fill}
 \end{pgfscope}
-\end{pgfpicture}
+\end{pgfpicture}%
 }%uulmlogo

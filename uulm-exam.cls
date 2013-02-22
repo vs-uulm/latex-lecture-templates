@@ -75,9 +75,9 @@
 % running headers
 \pagestyle{fancy}
 \fancyhead{\sffamily\fontsize{10pt}{10pt}\selectfont\@title \hfill \@date}% delete the default header
-% \fancyfoot{}% delete the default footer
+\fancyfoot{}% delete the default footer
 % page numbers
-\fancyfoot[C]{\hspace*{1.8cm}\sffamily\fontsize{10pt}{10pt}\selectfont\thepage/\pageref{LastPage}}
+\fancyfoot[C]{\hspace*{1.5cm}\sffamily\fontsize{10pt}{10pt}\selectfont\thepage/\pageref{LastPage}}
 % header for assignment sheets
 %\lhead{NAME, Vorname: \hfill Matrikel-Nr.: \hspace*{5em}}
 %\rfoot{}
@@ -305,7 +305,7 @@
 \newcounter{subpoints}[assignment]
 
 \newcommand{\assignment}[1]{%
-\cleardoublepage
+\clearpage
 % save subpoints of last assignment
 \refstepcounter{subpoints}\label{pointsref@\theassignment}%
 \refstepcounter{assignment}%
@@ -318,10 +318,11 @@
 
 \newenvironment{assignments}{
 % ausser Titelseite sind alle Seiten nach links versetzt
-\addtolength{\hoffset}{-1cm}
+\newgeometry{top=2.5cm,left=1.5cm,right=3cm,bottom=2cm}
 }{
 % notwendig, damit die Punkte der letzten Aufgabe korrekt angezeigt werden
 \refstepcounter{subpoints}\label{pointsref@\theassignment}%
+\restoregeometry% damit Rand der letzten Seite korrekt ausgerichtet ist
 }
 
 % Solutions

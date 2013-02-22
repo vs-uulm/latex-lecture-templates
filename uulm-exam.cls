@@ -1,9 +1,9 @@
 \ProvidesClass{uulm-exam}[2013/02/22 Klausur LaTeX Klasse der Uni Ulm]
 
-\LoadClass[11pt,a4paper,oneside,titlepage]{article}
+\LoadClass[11pt,a4paper,oneside,titlepage]{scrartcl}
 
 \RequirePackage{geometry}
-\geometry{top=2.5cm,left=2.3cm,right=2.3cm,bottom=2cm}
+\geometry{top=2.5cm,left=1.3cm,right=3.3cm,bottom=2.25cm}
 \RequirePackage{ngerman}
 \RequirePackage[utf8]{inputenc}
 \RequirePackage{epsf}
@@ -30,7 +30,6 @@
 \RequirePackage{enumitem}
 \RequirePackage{pgf}
 \RequirePackage{tikz}
-\RequirePackage{textpos}
 
 \RequirePackage{forloop}
 \RequirePackage{ifthen}
@@ -63,6 +62,7 @@
 \setlength{\parindent}{0cm}
 \setlength{\parskip}{1ex}
 \setlength{\headheight}{14pt}
+\renewcommand{\baselinestretch}{1.05}
 
 % labels, enumerations
 \renewcommand{\labelenumi}{\alph{enumi})}
@@ -183,6 +183,7 @@
 
 \renewcommand\maketitle{%
 \begin{titlepage}
+\begin{addmargin}[1cm]{-1cm}
 	\thispagestyle{empty}
 
 	\definecolor{dunkelgrau}{rgb}{0.7,0.7,0.7}
@@ -267,7 +268,7 @@
 	\colorbox{hellgrau}{
 		\begin{minipage}{\textwidth-2em}
 			\textbf{Vom Prüfer auszufüllen:}\hfill\barcode
-
+			\par\vspace*{0.4cm}
 			\ifthenelse{\totvalue{totalpoints} > 0}{
 			\makegradetable
 			}{
@@ -294,8 +295,9 @@
 			}
 		\end{minipage}
 	}
+\end{addmargin}
 \end{titlepage}
-	\newpage
+% \newpage
 }
 
 % Assignments
@@ -317,7 +319,7 @@
 \newenvironment{assignments}{
 % ausser Titelseite sind alle Seiten nach links versetzt
 % \newgeometry{top=2.5cm,left=1.5cm,right=3cm,bottom=2cm}
-\addtolength{\hoffset}{-1cm}%
+% \addtolength{\hoffset}{-1cm}%
 }{
 % notwendig, damit die Punkte der letzten Aufgabe korrekt angezeigt werden
 \refstepcounter{subpoints}\label{pointsref@\theassignment}%
@@ -362,13 +364,13 @@
 
 
 % Zusatzblaetter
-\xdef\@identifier{UNI ULM}
+\xdef\@identifier{}
 \newcommand\identifier[1]{\xdef\@identifier{#1}}
 
 \newcommand\makeemptysheet{%
 % \newgeometry{top=2.5cm,left=1.5cm,right=3cm,bottom=2cm}
 \clearpage
-\addtolength{\hoffset}{-1cm}
+% \addtolength{\hoffset}{-1cm}
 \raggedright\textbf{Zusatzblatt zu Aufgabe \rule{2em}{0.5pt}:}
 \vfill
 \raggedleft\bfseries{\Huge\color{lightgray}\rotatebox{45}{\@identifier}}

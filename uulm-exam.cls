@@ -198,6 +198,7 @@
 
 	\colorbox{hellgrau}{
 		\begin{minipage}{\textwidth-1em}
+			\vspace*{0.1cm}
 			\textbf{Vom Prüfungsteilnehmer auszufüllen:}
 			\vspace*{0.2cm}
 
@@ -205,30 +206,33 @@
 			\setlength{\aboverulesep}{-7pt}
 			\setlength{\belowrulesep}{0pt}
 
-			\begin{tabular}{lp{.2\textwidth}lp{.2\textwidth}p{.05\textwidth}l}
-				Name: &  & Vorname: &  & & \cellcolor{dunkelgrau} Matrikelnummer: \\
-				\cmidrule(l){2-2}\cmidrule(l){4-4}
-				Studiengang: &  & Abschluss: & & & \cellcolor{dunkelgrau} \\
-				\cmidrule(l){2-2}\cmidrule(l){4-4}\cmidrule(lr){6-6}
+			{\setlength{\tabcolsep}{0pt}
+			\begin{tabular}{lp{5.2cm}p{1ex}lp{4.2cm}p{1ex}l}
+				Name: &   & & Vorname: &  & & \cellcolor{dunkelgrau} Matrikelnummer:~ \\
+				\cmidrule(l){2-2}\cmidrule(l){5-5}
+				Studiengang: & &  & Abschluss: & & & \cellcolor{dunkelgrau} \\
+				\cmidrule(l){2-2}\cmidrule(l){5-5}\cmidrule(lr){7-7}
 			\end{tabular}
+			}%tabcolsep
 
 			\vspace*{1.5em}
 			Hiermit erkläre ich, dass ich prüfungsfähig bin. Sollte ich nicht
-			auf der Liste der angemeldeten Studierenden aufgeführt sein, dann nehme ich
-			hiermit zur Kenntnis, dass diese Prüfung nicht gewertet werden wird.
+			auf der Liste der angemeldeten Studierenden aufgeführt sein, dann 
+			nehme ich hiermit zur Kenntnis, dass diese Prüfung nicht gewertet
+			werden wird.
 
 			\vspace{2.5em}
 			\renewcommand{\arraystretch}{1}
 			\ifthenelse{\boolean{showcodeword}}%
 			{\begin{tabular*}{.9\textwidth}{lll}
 				\hspace{.4\textwidth}& \hspace{.1\textwidth} & \hspace{.4\textwidth} \\
-				\cmidrule(l){1-1} \cmidrule(l){3-3}
+				\cmidrule{1-1} \cmidrule(l){3-3}
 				\footnotesize{Unterschrift des Prüfungsteilnehmers}  & & \footnotesize{Optionales Codewort für den Aushang} \\
 			\end{tabular*}			
 			}{%
 			\begin{tabular*}{.9\textwidth}{l}
 				\hspace{.4\textwidth}\\
-				\cmidrule(l){1-1} %\cmidrule(l){3-3}
+				\cmidrule{1-1} %\cmidrule(l){3-3}
 				\footnotesize{Unterschrift des Prüfungsteilnehmers} \\
 			\end{tabular*}
 			}

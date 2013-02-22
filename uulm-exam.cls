@@ -29,6 +29,8 @@
 \RequirePackage{xargs}
 \RequirePackage{enumitem}
 \RequirePackage{pgf}
+\RequirePackage{tikz}
+\RequirePackage{textpos}
 
 \RequirePackage{forloop}
 \RequirePackage{ifthen}
@@ -67,11 +69,28 @@
 \renewcommand{\labelenumii}{\arabic{enumii}.}
 \renewcommand{\labelenumiii}{\arabic{enumiii})}
 
+\xdef\@mysecret{1}
+\newcommand\mysecret[1]{\xdef\@mysecret{#1}}
+\newcommand\barcode{
+\pgfmathsetseed{\@mysecret}%
+\begin{tikzpicture}[x=.25em,y=-.25em]
+\foreach \i in {0,...,19} {
+\foreach \j in {0,...,2} {
+\fill[opacity={random(2)-1}] (\i,\j) rectangle (\i+1,\j+1);
+}}
+\draw (0,0) rectangle (20,3);
+\end{tikzpicture}%
+}
+
 % running headers
 \pagestyle{fancy}
 \fancyhead{\sffamily\fontsize{10pt}{10pt}\selectfont\@title \hfill \@date}
 \fancyfoot{}% delete the default footer
 \fancyfoot[C]{\hspace*{1.5cm}\sffamily\fontsize{10pt}{10pt}\selectfont\thepage/\pageref{LastPage}}
+\fancyfoot[R]{%
+\sffamily\fontsize{10pt}{10pt}\selectfont%
+\barcode
+}
 
 % header for assignment sheets
 %\lhead{NAME, Vorname: \hfill Matrikel-Nr.: \hspace*{5em}}
@@ -246,7 +265,7 @@
 	\vfill
 	\colorbox{hellgrau}{
 		\begin{minipage}{\textwidth-2em}
-			\textbf{Vom Prüfer auszufüllen:}
+			\textbf{Vom Prüfer auszufüllen:}\hfill\barcode
 
 			\ifthenelse{\totvalue{totalpoints} > 0}{
 			\makegradetable
@@ -344,8 +363,7 @@
 \newcommand\identifier[1]{\xdef\@identifier{#1}}
 
 \newcommand\makeemptysheet{%
-%\fancyfoot{}
-\vspace*{1ex}
+\newgeometry{top=2.5cm,left=1.5cm,right=3cm,bottom=2cm}
 \raggedright\textbf{Zusatzblatt zu Aufgabe \rule{2em}{0.5pt}:}
 \vfill
 \raggedleft\bfseries{\Huge\color{lightgray}\rotatebox{45}{\@identifier}}

@@ -3,7 +3,7 @@
 \LoadClass[11pt,a4paper,oneside,titlepage]{article}
 
 \RequirePackage{geometry}
-\geometry{top=1.5cm,left=2.3cm,right=2.3cm,bottom=2cm}
+\geometry{top=2.5cm,left=2.3cm,right=2.3cm,bottom=2cm}
 \RequirePackage{ngerman}
 \RequirePackage[utf8]{inputenc}
 \RequirePackage{epsf}
@@ -189,6 +189,7 @@
 	\definecolor{hellgrau}{rgb}{0.85,0.85,0.85}
 	\definecolor{rahmengrau}{rgb}{0.8,0.8,0.8}
 
+	\vspace*{-1.5cm}
 	\uulmlogo
 
 	\small
@@ -315,11 +316,13 @@
 
 \newenvironment{assignments}{
 % ausser Titelseite sind alle Seiten nach links versetzt
-\newgeometry{top=2.5cm,left=1.5cm,right=3cm,bottom=2cm}
+% \newgeometry{top=2.5cm,left=1.5cm,right=3cm,bottom=2cm}
+\addtolength{\hoffset}{-1cm}%
 }{
 % notwendig, damit die Punkte der letzten Aufgabe korrekt angezeigt werden
 \refstepcounter{subpoints}\label{pointsref@\theassignment}%
-\restoregeometry% damit Rand der letzten Seite korrekt ausgerichtet ist
+% \addtolength{\hoffset}{-1cm}%
+% \restoregeometry% damit Rand der letzten Seite korrekt ausgerichtet ist
 }
 
 % Solutions
@@ -363,7 +366,9 @@
 \newcommand\identifier[1]{\xdef\@identifier{#1}}
 
 \newcommand\makeemptysheet{%
-\newgeometry{top=2.5cm,left=1.5cm,right=3cm,bottom=2cm}
+% \newgeometry{top=2.5cm,left=1.5cm,right=3cm,bottom=2cm}
+\clearpage
+\addtolength{\hoffset}{-1cm}
 \raggedright\textbf{Zusatzblatt zu Aufgabe \rule{2em}{0.5pt}:}
 \vfill
 \raggedleft\bfseries{\Huge\color{lightgray}\rotatebox{45}{\@identifier}}

@@ -351,16 +351,20 @@
 \end{minipage}
 \end{lrbox}
 \ifthenelse{\boolean{showsolutions}}{%
-\fbox{%
-\usebox{\solutionbox}
-}
+	\fbox{%
+		\usebox{\solutionbox}
+	}
 }{%showsolutions off
-\ifthenelse{\equal{\@drawlines}{true}}{
-\insertlines{\thesolutionlines}
-}{%else
-\answerspace{\thesolutionlines}
-}%ifthen
-}%ifthen
+	\ifthenelse{\equal{\thesolutionlines}{0}}{
+		\par% leave no space at all for solution
+	}{%else
+		\ifthenelse{\equal{\@drawlines}{true}}{
+			\insertlines{\thesolutionlines}
+		}{%else
+			\answerspace{\thesolutionlines}
+		}%if draw lines
+	}%if leave space
+}%if show solutions
 }%environment
 
 

@@ -135,48 +135,24 @@
 	\newcounter{tab}
 	\newcounter{nums}
 	\setcounter{nums}{\totvalue{assignment}}\addtocounter{nums}{1}
-
-	\ifthenelse{\totvalue{assignment} < 10}{% normal size table
-		\begin{center}
-			\begin{tabular}{|c *{\thenums}{|c}|}
-				\hline
-				\small Aufgabe & \forloop{tab}{1}{\value{tab} < \thenums}{{\thetab} &}
-				\hspace*{-0.1cm}$\sum$\\
-				\hline
-				\small Punkte & \forloop{tab}{1}{\value{tab} < \thenums}{{\small\getpoints{\thetab}} &}{\small\gettotalpoints}\\
-				\hline
-				\small Erreicht & \forloop{tab}{1}{\value{tab} < \thenums}{\hspace*{0.8cm} &} \hspace*{0.8cm}\parbox[0pt][2em][c]{0cm}{} \\
-				\hline
-				\small Zeichen & \forloop{tab}{1}{\value{tab} < \thenums}{&} \parbox[0pt][2em][c]{0cm}{}\\
-				\noalign{\hrule height 1pt}
-				& \forloop{tab}{1}{\value{tab} < \thenums}{&} \parbox[0pt][2em][c]{0cm}{}\\
-				\hline
-				& \forloop{tab}{1}{\value{tab} < \thenums}{&} \parbox[0pt][2em][c]{0cm}{}\\
-				\hline
-			\end{tabular}
-		\end{center}
-	}{ % compact size table
-		\begin{center}
-			\begin{tabular}{|c *{\thenums}{|c}|}
-				\hline
-				Aufg. & \forloop{tab}{1}{\value{tab} < \thenums}{{\small \thetab} &}
-				\small \hspace*{-0.1cm}$\sum$\\
-				\hline
-				Pkte & \forloop{tab}{1}{\value{tab} < \thenums}{{\small\getpoints{\thetab}} &}{\small\gettotalpoints}\\
-				\hline
-				Pkte & \forloop{tab}{1}{\value{tab} < \thenums}{\hspace*{0.5cm} &} \hspace*{0.5cm}\parbox[0pt][2em][c]{0cm}{} \\
-				\hline
-				\small Zeichen & \forloop{tab}{1}{\value{tab} < \thenums}{&} \parbox[0pt][2em][c]{0cm}{}\\
-				\hline
-				& \forloop{tab}{1}{\value{tab} < \thenums}{&} \parbox[0pt][2em][c]{0cm}{}\\
-				\hline
-				& \forloop{tab}{1}{\value{tab} < \thenums}{&}
-				\parbox[0pt][2em][c]{0cm}{}\\
-				\hline
-			\end{tabular}
-		\end{center}
-	}
-% \renewcommand{\arraystretch}{\old@arraystretch}
+	\begin{center}
+		\begin{tabular}{|l *{\thenums}{|c}|}
+			\hline
+			\small Aufgabe & \forloop{tab}{1}{\value{tab} < \thenums}{{\thetab} &}
+			\hspace*{-0.1cm}$\sum$\\
+			\hline
+			\small Punkte & \forloop{tab}{1}{\value{tab} < \thenums}{{\small\getpoints{\thetab}} &}{\small\gettotalpoints}\\
+			\hline
+			\small Erreicht & \forloop{tab}{1}{\value{tab} < \thenums}{\hspace*{0.55cm} &} \hspace*{0.8cm}\parbox[0pt][2em][c]{0cm}{} \\
+			\hline
+			\small Zeichen & \forloop{tab}{1}{\value{tab} < \thenums}{&} \parbox[0pt][2em][c]{0cm}{}\\
+			\noalign{\hrule height 1pt}
+			& \forloop{tab}{1}{\value{tab} < \thenums}{&} \parbox[0pt][2em][c]{0cm}{}\\
+			\hline
+			& \forloop{tab}{1}{\value{tab} < \thenums}{&} \parbox[0pt][2em][c]{0cm}{}\\
+			\hline
+		\end{tabular}
+	\end{center}
 }
 
 % title page

@@ -1,20 +1,34 @@
-% !TEX encoding = UTF-8 Unicode
-\documentclass{article}
+\documentclass[nocolor]{uulm-assignment}
+\setboolean{showsolutions}{false} % Compile with or without answers
 
-\usepackage{uulm-quiz}
-\usepackage[utf8]{inputenc}
+% \usepackage[utf-8]{inputenc}
+\usepackage{subfigure}
 
-\renewcommand{\assignmentno}{zu Übung 1}
-\date{10 Minuten} % Dauer
+\usepackage{amssymb}
+\usepackage{hyperref}
+\usepackage{tikz}
+
+\faculty{Institut für Verteilte Systeme}
+\course{Mobilkommunikation}
+\semester{Wintersemester 2012/2013}
+\supervisor{Stefan Dietzel,
+	Dominik Lang,
+	Thomas Lukaseder,
+	Prof. Dr. Frank Kargl}
+ 
+% \assignmentdeadline{03.02.2013, 23:59}	 % Abgabedatum: XYZ
+\assignmentduration{15 Minuten} % Bearbeitungsdauer: XYZ
+\studentdata	              % Name & Matrikelnummer Feld
+
+\assignmenttype{Quiz}
+\assignmentno{6}
+\title{MANET-Simulation}
 
 \begin{document}
-	\maketitle
-	
-	\question{}{2 Punkte}
-	Bei der Model-View-Controller Architektur spielen zwei Modelle eine Rolle. Welche sind das, welches davon ist fest vorgegeben, welches veränderlich?
-	 
-    \newpage
-	\question{}{2 Punkte}
-	Wer bestimmt das fest vorgegebene Modell? Was passiert, wenn die beiden Modelle erheblich voneinander abweichen?
-	 
+\maketitle
+
+\task{Frage}{JiST/SWANS-Umgebung}{4}
+
+Laden Sie die JiST/SWANS-Distribution aus ILIAS herunter. Übersetzen Sie die Sourcen mittels Ant: \verb|ant build|. Als eines der Beispielprotokolle enthält die Distribution eine Implementierung des AODV-Protokolls, welches Sie auch in der Vorlesung kennen gelernt haben.
+
 \end{document}

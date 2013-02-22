@@ -1,60 +1,34 @@
-% !TEX encoding = UTF-8 Unicode
-\documentclass{article}
+\documentclass{uulm-assignment}
+\setboolean{showsolutions}{false} % Compile with or without answers
 
-\usepackage{uulm-assignment}
-\usepackage[utf8]{inputenc}
+% \usepackage[utf-8]{inputenc}
+\usepackage{subfigure}
 
-\title{Generisches Interaktionsmodell}
-\renewcommand{\assignmentno}{1}
-\date{Mittwoch, 2.11.2011, 20 Uhr} % Abgabedatum
+\usepackage{amssymb}
+\usepackage{hyperref}
+\usepackage{tikz}
+
+\faculty{Institut für Verteilte Systeme}
+\course{Mobilkommunikation}
+\semester{Wintersemester 2012/2013}
+\supervisor{Stefan Dietzel,
+	Dominik Lang,
+	Thomas Lukaseder,
+	Prof. Dr. Frank Kargl}
+ 
+\assignmentdeadline{03.02.2013, 23:59}	 % Abgabedatum: XYZ
+%\assignmentduration{15 Minuten} % Bearbeitungsdauer: XYZ
+% \studentdata	              % Name & Matrikelnummer Feld
+
+\assignmenttype{Übungsblatt}
+\assignmentno{6}
+\title{MANET-Simulation}
 
 \begin{document}
- 	\maketitle
+\maketitle
 
-	\task{Interaktionsbr\"uche}{4}
-	Don Norman beschreibt zwei Arten von Br\"uchen im Interaktionszyklus: \emph{Gulf of Evaluation} und \emph{Gulf of Execution}. Finden sie Beispiele f\"ur diese Arten von Br\"uchen im Interkationszyklus von Ihnen bekannten Systemen. 
-	
-	\begin{subtask}
-		Finden Sie 2 Beispiele f\"ur \emph{Gulf of Evaluation}. Dokumentieren Sie diese textuell und wenn m"oglich mit Fotos.
-	\end{subtask}
-	
-	\begin{subtask}
-		Finden Sie 2 Beispiele f\"ur \emph{Gulf of Execution}. Dokumentieren Sie diese textuell und wenn m"oglich mit Fotos.
-	\end{subtask}
-	
-\task{Minesweeper}{8}
+\task{Aufgabe}{JiST/SWANS-Umgebung}{4}
 
-In der Vorlesung wurde ein mögliches \emph{Model} (im Sinne von MVC) für Minesweeper diskutiert. Im Folgenden sollen Sie ein solches Model nun implementieren.
+Laden Sie die JiST/SWANS-Distribution aus ILIAS herunter. Übersetzen Sie die Sourcen mittels Ant: \verb|ant build|. Als eines der Beispielprotokolle enthält die Distribution eine Implementierung des AODV-Protokolls, welches Sie auch in der Vorlesung kennen gelernt haben.
 
-\begin{subtask}
-	Laden Sie von ILIAS das Minesweeper Eclipse Projekt herunter (minesweeper01.zip) und importieren Sie dieses in Eclipse. Das Projekt bietet bereits ein View/Controller Framework und ein unvollständiges Model (Model.java), welches Sie im Folgenden vervollständigen sollen.
-\end{subtask}
-
-\begin{subtask}
-Überlegen Sie sich zuerst eine Datenstruktur für Ihr Spielbrett. und intgerieren Sie es in die Klasse Model.java. Die Klasse Cell.java repräsentiert bereits ein Einzelfeld und sollte verwendet werden. Implementieren Sie die Methode Model.cellAt(int x, int y), so dass aufgrund Ihres Spielbrettes die richtige Zelle zurückgeliefert wird.
-\end{subtask}
-
-\begin{subtask}
-	Implementieren Sie die Methode Model.resetGame() um ein Spiel zu initialisieren. Bomben sollen hierbei zufällig plaziert werden. Der View sollte nun das Spielfeld anzeigen.
-\end{subtask}
-
-\begin{subtask}
-	Implementieren Sie das Markieren von Zellen in Model.markCell(int x, int y). Beachten Sie, dass bereits aufgedeckte Zellen nicht markiert werden können.
-\end{subtask}
-
-\begin{subtask}
-	Implementieren Sie das Aufdecken von Zellen in Model.revealCell(int x, int y). Wenn eine Bombe getroffen wird, ist das Spiel verloren.
-\end{subtask}
-
-
-\begin{subtask}
-	Überlegen Sie, wann das Spiel gewonnen ist und integrieren Sie die Behandlung von gewinnen (won=true) und verlieren (lost=true).
-\end{subtask}
-
-
-\begin{subtask}
-	Passen Sie den View so an, dass bei aufgedeckten Feldern die Zahl der benachbarten Bomben angezeigt wird.
-\end{subtask}
-
-Viel Erfolg!
 \end{document}

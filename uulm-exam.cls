@@ -1,4 +1,4 @@
-\ProvidesClass{uulm-exam}[2013/02/21 Klausur LaTeX Klasse der Uni Ulm]
+\ProvidesClass{uulm-exam}[2013/02/22 Klausur LaTeX Klasse der Uni Ulm]
 
 \LoadClass[11pt,a4paper,oneside,titlepage]{article}
 
@@ -34,7 +34,7 @@
 \RequirePackage{forloop}
 \RequirePackage{ifthen}
 \RequirePackage{suffix}
-\RequirePackage{totpages}
+\RequirePackage{lastpage}
 
 % sans serif font (computer modern bright)
 %\RequirePackage{cmbright}
@@ -77,7 +77,7 @@
 \fancyhead{\sffamily\fontsize{10pt}{10pt}\selectfont\@title \hfill \@date}% delete the default header
 % \fancyfoot{}% delete the default footer
 % page numbers
-\fancyfoot[C]{\hspace*{1.8cm}\sffamily\fontsize{10pt}{10pt}\selectfont\thepage/\ref{TotPages}}
+\fancyfoot[C]{\hspace*{1.8cm}\sffamily\fontsize{10pt}{10pt}\selectfont\thepage/\pageref{LastPage}}
 % header for assignment sheets
 %\lhead{NAME, Vorname: \hfill Matrikel-Nr.: \hspace*{5em}}
 %\rfoot{}

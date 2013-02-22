@@ -36,6 +36,14 @@
 \RequirePackage{suffix}
 \RequirePackage{lastpage}
 
+\RequirePackage[pdftex,
+	unicode=true,
+	breaklinks=true,
+	colorlinks=true,
+	linkcolor=black,
+	citecolor=black,
+	urlcolor=black]{hyperref}
+
 \definecolor{middlegray}{rgb}{0.5,0.5,0.5}
 \definecolor{lightgray}{rgb}{0.8,0.8,0.8}
 
@@ -309,12 +317,16 @@
 % save subpoints of last assignment
 \refstepcounter{subpoints}\label{pointsref@\theassignment}%
 \refstepcounter{assignment}%
+\addpenalty{\@secpenalty}%
 \vspace*{0ex}{\Large\textbf{Aufgabe \arabic{assignment}:}~\textbf{#1}}\hfill\emph{(\getpoints{\theassignment}\,Punkte)}%
 \marginpar{~~%
 \begin{picture}(30,18)(0,5)%
 \framebox(30,18){}%
 \end{picture}%
-}}
+}%
+\addcontentsline{toc}{section}{A\arabic{assignment}: #1}%
+\par
+}
 
 \newenvironment{assignments}{
 % ausser Titelseite sind alle Seiten nach links versetzt

@@ -35,9 +35,6 @@
 \RequirePackage{suffix}
 \RequirePackage{lastpage}
 
-% sans serif font (computer modern bright)
-%\RequirePackage{cmbright}
-
 \definecolor{middlegray}{rgb}{0.5,0.5,0.5}
 \definecolor{lightgray}{rgb}{0.8,0.8,0.8}
 
@@ -67,16 +64,15 @@
 
 % labels, enumerations
 \renewcommand{\labelenumi}{\alph{enumi})}
-% \renewcommand{\labelenumii}{\alph{enumii})}
 \renewcommand{\labelenumii}{\arabic{enumii}.}
 \renewcommand{\labelenumiii}{\arabic{enumiii})}
 
 % running headers
 \pagestyle{fancy}
-\fancyhead{\sffamily\fontsize{10pt}{10pt}\selectfont\@title \hfill \@date}% delete the default header
+\fancyhead{\sffamily\fontsize{10pt}{10pt}\selectfont\@title \hfill \@date}
 \fancyfoot{}% delete the default footer
-% page numbers
 \fancyfoot[C]{\hspace*{1.5cm}\sffamily\fontsize{10pt}{10pt}\selectfont\thepage/\pageref{LastPage}}
+
 % header for assignment sheets
 %\lhead{NAME, Vorname: \hfill Matrikel-Nr.: \hspace*{5em}}
 %\rfoot{}
@@ -226,7 +222,7 @@
 			}{%
 			\begin{tabular*}{.9\textwidth}{l}
 				\hspace{.4\textwidth}\\
-				\cmidrule{1-1} %\cmidrule(l){3-3}
+				\cmidrule{1-1}
 				\footnotesize{Unterschrift des Prüfungsteilnehmers} \\
 			\end{tabular*}
 			}
@@ -282,18 +278,6 @@
 	\newpage
 }
 
-% \newcommand\setpoints[2]{%
-% \expandafter\def\csname points@#1 \endcsname{#2}%
-% \addtocounter{totalpoints}{#2}
-% }
-% \newcommand\getpoints[1]{\expandafter\csname points@#1 \endcsname}
-
-%
-% \newcommand\setsubpoints[3]{%
-% \expandafter\def\csname points@#1@#2 \endcsname{#3}%
-% }
-% \newcommand\getsubpoints[2]{\expandafter\csname points@#1@#2 \endcsname}
-
 % Assignments
 \newtotcounter{assignment}
 \newcounter{subpoints}[assignment]
@@ -322,14 +306,6 @@
 % Solutions
 \newboolean{showsolutions}
 \setboolean{showsolutions}{false}
-
-% \newcommand{\checksolution}{
-% % Include or exclude solutions
-% \specialcomment{solution}{\begingroup\color{red}\textbf{Lösung}\ }{\endgroup}%
-% \specialcomment{newpagesolution}{\newpage\begingroup\color{red}\textbf{Lösung}\ }{\endgroup}%
-% %
-% \ifthenelse{\boolean{showsolutions}}{}{\excludecomment{solution}\excludecomment{newpagesolution}}%
-% }
 
 \newcounter{solutionlines}
 \def\@drawlines{false}
@@ -376,7 +352,7 @@
 \newpage
 }
 
-% Antworträume
+% Antwortraeume
 
 %% Linien
 \newcounter{lines}%
@@ -391,6 +367,7 @@
 \ \vspace{.3em} \\
 }
 
+%% Blanko
 \newcommand{\answerspace}[1]{%
 \ \vspace{1em}
 \forloop{lines}{0}{\value{lines} < #1}{%
@@ -400,7 +377,9 @@
 }
 
 
-% ------------------------------------------------------------------------------
+% ---------------------------------------------------------------------------
+% PGF commands, generated using http://sourceforge.net/projects/eps2pgf/
+% ---------------------------------------------------------------------------
 
 \newcommand\uulmlogo{
 \begin{pgfpicture}

@@ -344,12 +344,12 @@
 \setboolean{showsolutions}{false}
 
 \newcounter{solutionlines}
-\def\@drawlines{false}
+\def\@papertype{lines}% or blank or squared
 \newsavebox{\solutionbox}
-\newenvironmentx{solution}[2][2=true]{
+\newenvironmentx{solution}[2][2=lines]{
 \par%
 \setcounter{solutionlines}{#1}
-\def\@drawlines{#2}
+\def\@papertype{#2}
 \begin{lrbox}{\solutionbox}
 \begin{minipage}{.9\textwidth}
 \color{red}\textbf{Lösung:}
@@ -365,11 +365,15 @@
 	\ifthenelse{\equal{\thesolutionlines}{0}}{
 		\par% leave no space at all for solution
 	}{%else
-		\ifthenelse{\equal{\@drawlines}{true}}{
+		\ifthenelse{\equal{\@papertype}{lines}}{
 			\insertlines{\thesolutionlines}
-		}{%else
+		}{}
+		\ifthenelse{\equal{\@papertype}{blank}}{
 			\answerspace{\thesolutionlines}
-		}%if draw lines
+		}{}
+		\ifthenelse{\equal{\@papertype}{squared}}{
+			\insertsquared{\thesolutionlines}
+		}{}
 	}%if leave space
 }%if show solutions
 }%environment
@@ -391,26 +395,38 @@
 
 % Antwortraeume
 
-%% Linien
 \newcounter{lines}%
 
+\tikzset{lines/.style={very thin, black!40}}
+
+%% Linien
 \newcommand{\insertlines}[1]{%
-\definecolor{line}{gray}{0.5}
-\ \vspace{1em}
-\forloop{lines}{0}{\value{lines} < #1}{%
-    \ \vspace{.2em}\\%
-	\textcolor{line}{\rule{\linewidth}{0.4pt}}%
+	\vspace*{1em}
+	\forloop{lines}{0}{\value{lines} < #1}{%
+		\par\noindent\tikz[x=\linewidth,y=1.2em]{%
+			\path (0,0) rectangle (1,1);
+			\draw[lines] (0,0) -- (1,0);
+		}
+	}
 }
-\ \vspace{.3em} \\
+
+%% Karos
+\newcommand{\insertsquared}[1]{%
+	\vspace*{1em}
+	\par\noindent\tikz[x=1.2em,y=1.2em]{%
+		\draw[step=1.0,lines] (0,0) grid (\linewidth,#1);
+		\draw[lines] (\linewidth,0) -- (\linewidth,#1);
+	}
 }
 
 %% Blanko
 \newcommand{\answerspace}[1]{%
-\ \vspace{1em}
-\forloop{lines}{0}{\value{lines} < #1}{%
-    \ \vspace{1.2em}\\%
-}
-\ \vspace{.3em} \\
+	\vspace*{1em}
+	\forloop{lines}{0}{\value{lines} < #1}{%
+		\par\noindent\tikz[x=\linewidth,y=1.2em]{%
+			\path (0,0) rectangle (1,1);
+		}
+	}
 }
 
 

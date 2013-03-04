@@ -128,7 +128,7 @@
 }{%
 \marginpar{\tikz[align]\node[ptbox] {};}%
 }%
-}}
+}
 
 % modify subpoints counter without displaying a box
 \WithSuffix\newcommand\subpoints*[1]{\addtocounter{subpoints}{#1}
@@ -363,14 +363,10 @@ Korrektur-Status:\\[2pt]
 
 \newenvironment{assignments}{
 % ausser Titelseite sind alle Seiten nach links versetzt
-% \newgeometry{top=2.5cm,left=1.5cm,right=3cm,bottom=2cm}
-% \addtolength{\hoffset}{-1cm}%
 }{
 % notwendig, damit die Punkte der letzten Aufgabe korrekt angezeigt werden
 \refstepcounter{subpoints}\label{pointsref@\theassignment}%
 \refstepcounter{subtasks}\label{tasksref@\theassignment}%
-% \addtolength{\hoffset}{-1cm}%
-% \restoregeometry% damit Rand der letzten Seite korrekt ausgerichtet ist
 }
 
 % Solutions
@@ -418,9 +414,7 @@ Korrektur-Status:\\[2pt]
 \newcommand\identifier[1]{\xdef\@identifier{#1}}
 
 \newcommand\makeemptysheet{%
-% \newgeometry{top=2.5cm,left=1.5cm,right=3cm,bottom=2cm}
 \clearpage
-% \addtolength{\hoffset}{-1cm}
 \raggedright\textbf{Zusatzblatt zu Aufgabe \rule{2em}{0.5pt}:}
 \vfill
 \raggedleft\bfseries{\Huge\color{lightgray}\rotatebox{45}{\@identifier}}
@@ -430,7 +424,6 @@ Korrektur-Status:\\[2pt]
 % Antwortraeume
 
 \newcounter{lines}%
-
 \tikzset{lines/.style={very thin, black!40}}
 
 %% Linien

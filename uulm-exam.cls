@@ -30,6 +30,7 @@
 \RequirePackage{enumitem}
 \RequirePackage{pgf}
 \RequirePackage{tikz}
+\usetikzlibrary{chains}
 
 \RequirePackage{forloop}
 \RequirePackage{ifthen}
@@ -112,14 +113,23 @@
 % get points of one assignment
 \newcommand\getpoints[1]{\number\numexpr\getrefnumber{pointsref@#1}-1\relax}
 
+% get subtasks of one assignment
+\newcommand\getsubtasks[1]{\number\numexpr\getrefnumber{tasksref@#1}-1\relax}
+
 % define subpoints
-\newcommand\subpoints[1]{\hspace*{\fill}\emph{(#1\,P)\hspace*{0.0em}}%
-\addtocounter{subpoints}{#1}
-\addtocounter{totalpoints}{#1}
-\marginpar{~~%
-\begin{picture}(30,18)(0,5)%
-\framebox(30,18){}%
+\newcommand\subpoints[1]{\hspace*{\fill}\emph{(#1\,P)}%
+\addtocounter{subpoints}{#1}%
+\addtocounter{subtasks}{1}%
+\addtocounter{totalpoints}{#1}%
+\marginpar{~%
+\begin{picture}(28,18)(0,5)%
+\framebox(28,18){}%
 \end{picture}%
+\ifthenelse{\boolean{showsubtaskboxes}}{%
+\begin{picture}(28,18)(0,5)%
+\framebox(28,18){}%
+\end{picture}%
+}{}%
 }}
 
 % modify subpoints counter without displaying a box
@@ -166,15 +176,33 @@
 			\small Punkte & \forloop{tab}{1}{\value{tab} < \thenums}{{\small\getpoints{\thetab}} &}{\small\gettotalpoints}\\
 			\hline
 			\small Erreicht & \forloop{tab}{1}{\value{tab} < \thenums}{\hspace*{0.55cm} &} \hspace*{0.8cm}\parbox[0pt][2em][c]{0cm}{} \\
+% \ifthenelse{\boolean{showsubtaskboxes}}{}{%
 			\hline
 			\small Zeichen & \forloop{tab}{1}{\value{tab} < \thenums}{&} \parbox[0pt][2em][c]{0cm}{}\\
 			\noalign{\hrule height 1pt}
 			& \forloop{tab}{1}{\value{tab} < \thenums}{&} \parbox[0pt][2em][c]{0cm}{}\\
+% }%if subtaskboxes
 			\hline
 			& \forloop{tab}{1}{\value{tab} < \thenums}{&} \parbox[0pt][2em][c]{0cm}{}\\
 			\hline
 		\end{tabular}
 	\end{center}
+}
+
+\newcommand\makesubtasktable{%
+\tiny
+Korrektur-Status:\\[2pt]
+\newcounter{temp}%
+\begin{tikzpicture}[start chain=going right,node distance=0]
+\foreach \task in {1,...,12}{%
+	\node[on chain,fill=black,text=white,draw,minimum width=2em,minimum height=1.5em] {\task};
+	\foreach \subtask in {1,...,\getsubtasks{\task}} {%
+		\setcounter{temp}{\subtask}
+		\node[on chain,draw,minimum width=1.2em,minimum height=1.5em] {\alph{temp}};
+	}
+	\node[inner sep=0,minimum width=2pt,on chain] {}; 
+}
+\end{tikzpicture}
 }
 
 % title page
@@ -188,6 +216,7 @@
 %booleans to alter title page
 \newboolean{showcodeword}
 \newboolean{showbonus}
+\newboolean{showsubtaskboxes}}
 
 \renewcommand\maketitle{%
 \begin{titlepage}
@@ -303,6 +332,8 @@
 			}
 		\end{minipage}
 	}
+\vfill
+\ifthenelse{\boolean{showsubtaskboxes}}{\makesubtasktable}{}
 \end{addmargin}
 \end{titlepage}
 % \newpage
@@ -311,17 +342,19 @@
 % Assignments
 \newtotcounter{assignment}
 \newcounter{subpoints}[assignment]
+\newcounter{subtasks}[assignment]
 
 \newcommand{\assignment}[1]{%
 \clearpage
 % save subpoints of last assignment
 \refstepcounter{subpoints}\label{pointsref@\theassignment}%
+\refstepcounter{subtasks}\label{tasksref@\theassignment}%
 \refstepcounter{assignment}%
 \addpenalty{\@secpenalty}%
 \vspace*{0ex}{\Large\textbf{Aufgabe \arabic{assignment}:}~\textbf{#1}}\hfill\emph{(\getpoints{\theassignment}\,Punkte)}%
-\marginpar{~~%
-\begin{picture}(30,18)(0,5)%
-\framebox(30,18){}%
+\marginpar{~%
+\begin{picture}(28,18)(0,5)%
+\framebox(28,18){}%
 \end{picture}%
 }%
 \addcontentsline{toc}{section}{A\arabic{assignment}: #1}%
@@ -335,6 +368,7 @@
 }{
 % notwendig, damit die Punkte der letzten Aufgabe korrekt angezeigt werden
 \refstepcounter{subpoints}\label{pointsref@\theassignment}%
+\refstepcounter{subtasks}\label{tasksref@\theassignment}%
 % \addtolength{\hoffset}{-1cm}%
 % \restoregeometry% damit Rand der letzten Seite korrekt ausgerichtet ist
 }
@@ -345,11 +379,11 @@
 
 \newcounter{solutionlines}
 \def\@papertype{lines}% or blank or squared
-\newsavebox{\solutionbox}
-\newenvironmentx{solution}[2][2=lines]{
+\newsavebox{\solutionbox}%
+\newenvironmentx{solution}[2][2=lines]{%
 \par%
-\setcounter{solutionlines}{#1}
-\def\@papertype{#2}
+\setcounter{solutionlines}{#1}%
+\def\@papertype{#2}%
 \begin{lrbox}{\solutionbox}
 \begin{minipage}{.9\textwidth}
 \color{red}\textbf{Lösung:}

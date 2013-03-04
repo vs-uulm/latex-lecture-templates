@@ -121,15 +121,13 @@
 \addtocounter{subpoints}{#1}%
 \addtocounter{subtasks}{1}%
 \addtocounter{totalpoints}{#1}%
-\marginpar{~%
-\begin{picture}(28,18)(0,5)%
-\framebox(28,18){}%
-\end{picture}%
 \ifthenelse{\boolean{showsubtaskboxes}}{%
-\begin{picture}(28,18)(0,5)%
-\framebox(28,18){}%
-\end{picture}%
-}{}%
+\marginpar{\begin{tikzpicture}[align]
+\node[xscale=1.66,ptbox,path picture={\draw (0,-1em)--(4pt,1em);}] {};
+\end{tikzpicture}}%
+}{%
+\marginpar{\tikz[align]\node[ptbox] {};}%
+}%
 }}
 
 % modify subpoints counter without displaying a box
@@ -198,7 +196,7 @@ Korrektur-Status:\\[2pt]
 	\node[on chain,fill=black,text=white,draw,minimum width=2em,minimum height=1.5em] {\task};
 	\foreach \subtask in {1,...,\getsubtasks{\task}} {%
 		\setcounter{temp}{\subtask}
-		\node[on chain,draw,minimum width=1.2em,minimum height=1.5em] {\alph{temp}};
+		\node[on chain,draw,minimum width=1.333em,minimum height=1.5em] {\Alph{temp}};
 	}
 	\node[inner sep=0,minimum width=2pt,on chain] {}; 
 }
@@ -332,8 +330,11 @@ Korrektur-Status:\\[2pt]
 			}
 		\end{minipage}
 	}
+\ifthenelse{\boolean{showsubtaskboxes}}{%
 \vfill
-\ifthenelse{\boolean{showsubtaskboxes}}{\makesubtasktable}{}
+\enlargethispage{3\baselineskip}%
+\makesubtasktable%
+}{}
 \end{addmargin}
 \end{titlepage}
 % \newpage
@@ -344,6 +345,9 @@ Korrektur-Status:\\[2pt]
 \newcounter{subpoints}[assignment]
 \newcounter{subtasks}[assignment]
 
+\tikzstyle{ptbox}=[inner sep=0,minimum width=3em,minimum height=2em,draw]
+\tikzstyle{align}=[baseline=-.66ex]
+
 \newcommand{\assignment}[1]{%
 \clearpage
 % save subpoints of last assignment
@@ -352,11 +356,7 @@ Korrektur-Status:\\[2pt]
 \refstepcounter{assignment}%
 \addpenalty{\@secpenalty}%
 \vspace*{0ex}{\Large\textbf{Aufgabe \arabic{assignment}:}~\textbf{#1}}\hfill\emph{(\getpoints{\theassignment}\,Punkte)}%
-\marginpar{~%
-\begin{picture}(28,18)(0,5)%
-\framebox(28,18){}%
-\end{picture}%
-}%
+\marginpar{\tikz[align]\node[ptbox] {};}%
 \addcontentsline{toc}{section}{A\arabic{assignment}: #1}%
 \par
 }

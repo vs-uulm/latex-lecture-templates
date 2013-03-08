@@ -214,7 +214,7 @@ Korrektur-Status:\\[2pt]
 %booleans to alter title page
 \newboolean{showcodeword}
 \newboolean{showbonus}
-\newboolean{showsubtaskboxes}}
+\newboolean{showsubtaskboxes}
 
 \renewcommand\maketitle{%
 \begin{titlepage}

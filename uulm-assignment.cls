@@ -147,6 +147,7 @@
 % ---------------------------------------------------------------------------
 
 \newcommand\uulmlogo[1]{
+\hspace*{-8pt}
 \begin{pgfpicture}
 \pgftransformscale{20mm/40mm}
 \pgfpathmoveto{\pgfqpoint{0cm}{0cm}}

@@ -10,7 +10,7 @@
 \RequirePackage{ifthen}
 \RequirePackage{tikz}
 
-\RequirePackage[ngerman]{babel}
+\RequirePackage[english,ngerman]{babel}
 
 \RequirePackage[margin=2cm,a4paper]{geometry}
 
@@ -56,11 +56,14 @@
 }
 \def\@assignmentdeadline{} % default empty
 \newcommand{\assignmentdeadline}[1]{
-  \def\@assignmentdeadline{{\Large Abgabetermin: #1}}
+  \def\@assignmentdeadline{{\Large%
+  \iflanguage{ngerman}{Abgabetermin:}{Deadline:}
+  #1}}
 }
 \def\@assignmentduration{} % default empty
 \newcommand{\assignmentduration}[1]{
-  \def\@assignmentduration{Bearbeitungsdauer: #1}
+  \def\@assignmentduration{%
+  \iflanguage{ngerman}{Bearbeitungsdauer:}{Duration:} #1}
 }
 \newcommand{\assignmentno}[1]{\def\theassignmentno{#1}}
 \newcounter{task}

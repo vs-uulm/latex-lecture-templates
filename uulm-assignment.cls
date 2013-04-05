@@ -12,7 +12,7 @@
 
 \RequirePackage[english,ngerman]{babel}
 
-\RequirePackage[margin=2cm,a4paper]{geometry}
+\RequirePackage[margin=2cm,a4paper,ignorehead,headsep=1.2cm]{geometry}
 
 \RequirePackage{graphicx}
 \RequirePackage{hyperref}
@@ -71,6 +71,7 @@
 %% End - Definitions for additional title page commands
 
 \renewcommand{\maketitle}{
+\thispagestyle{empty}
 \ifthenelse{\boolean{nocolor}}{%
 \uulmlogo{black}
 }{%
@@ -141,6 +142,18 @@
 \setlength{\parskip}{10pt}} % Am Anfang des Environments
 {\end{minipage}} % Am Ende des Environments
 
+\RequirePackage{scrpage2}
+\clearscrheadfoot
+\renewcommand\headfont{\normalfont}
+\chead{%
+\begin{tikzpicture}[overlay]
+\fill[uulm-akzent!40] (-11,0) rectangle (11,8mm);
+\node[fill=uulm-in,text=white,minimum width=1.8cm,inner sep=1pt,minimum height=8mm] at (-9.6,4mm) {\pagemark};
+\node[text=uulm-akzent!50!black,right,inner sep=1pt,minimum height=8mm] at (-8.5,3.6mm) {\@course{} $|$ \@title};
+\end{tikzpicture}
+}
+
+\pagestyle{scrheadings}
 
 % ---------------------------------------------------------------------------
 % PGF commands, generated using http://sourceforge.net/projects/eps2pgf/
@@ -150,20 +163,7 @@
 \hspace*{-8pt}
 \begin{pgfpicture}
 \pgftransformscale{20mm/40mm}
-\pgfpathmoveto{\pgfqpoint{0cm}{0cm}}
-\pgfpathlineto{\pgfqpoint{20.002cm}{0cm}}
-\pgfpathlineto{\pgfqpoint{20.002cm}{4.022cm}}
-\pgfpathlineto{\pgfqpoint{0cm}{4.022cm}}
-\pgfpathclose
-\pgfusepath{clip}
 \begin{pgfscope}
-\pgfpathmoveto{\pgfqpoint{0cm}{4cm}}
-\pgfpathlineto{\pgfqpoint{20cm}{4cm}}
-\pgfpathlineto{\pgfqpoint{20cm}{0cm}}
-\pgfpathlineto{\pgfqpoint{0cm}{0cm}}
-\pgfpathlineto{\pgfqpoint{0cm}{4cm}}
-\pgfpathclose
-\pgfusepath{clip}
 \pgfsetstrokecolor{#1}\pgfsetfillcolor{#1}
 \pgfpathmoveto{\pgfqpoint{3.307cm}{2.354cm}}
 \pgfpathcurveto{\pgfqpoint{3.292cm}{2.354cm}}{\pgfqpoint{3.279cm}{2.35cm}}{\pgfqpoint{3.268cm}{2.343cm}}
@@ -1242,6 +1242,13 @@
 \hfill
 \begin{pgfpicture}
 \pgftransformscale{20mm/40mm}
+\pgfpathmoveto{\pgfqpoint{0cm}{4cm}}
+\pgfpathlineto{\pgfqpoint{20cm}{4cm}}
+\pgfpathlineto{\pgfqpoint{20cm}{0cm}}
+\pgfpathlineto{\pgfqpoint{0cm}{0cm}}
+\pgfpathlineto{\pgfqpoint{0cm}{4cm}}
+\pgfpathclose
+\pgfusepath{clip}
 \begin{pgfscope}
 \pgfsetstrokecolor{#1}\pgfsetfillcolor{#1}
 \pgfpathmoveto{\pgfqpoint{11.814cm}{3.481cm}}

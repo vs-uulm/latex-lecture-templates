@@ -148,8 +148,9 @@
 \chead{%
 \begin{tikzpicture}[overlay]
 \fill[uulm-akzent!40] (-11,0) rectangle (11,8mm);
-\node[fill=uulm-in,text=white,minimum width=1.8cm,inner sep=1pt,minimum height=8mm] at (-9.6,4mm) {\pagemark};
-\node[text=uulm-akzent!50!black,right,inner sep=1pt,minimum height=8mm] at (-8.5,3.6mm) {\@course{} $|$ \@title};
+\fill[uulm-in] (-11,0) rectangle (-10.5+1.8,8mm);
+\node[text=white,minimum width=1.8cm,inner sep=0,minimum height=8mm] at (-9.6,3.5mm) {\pagemark\vphantom{$|$My}}; %phantom to compensate baseline alignment
+\node[text=uulm-akzent!50!black,right,inner sep=0,minimum height=8mm] at (-8.5,3.5mm) {\@course{} $|$ \@title};
 \end{tikzpicture}
 }
 

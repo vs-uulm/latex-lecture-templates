@@ -192,7 +192,7 @@
 Korrektur-Status:\\[2pt]
 \newcounter{temp}%
 \begin{tikzpicture}[start chain=going right,node distance=0]
-\foreach \task in {1,...,12}{%
+\foreach \task in {1,...,\totvalue{assignment}}{%
 	\node[on chain,fill=black,text=white,draw,minimum width=2em,minimum height=1.5em] {\task};
 	\foreach \subtask in {1,...,\getsubtasks{\task}} {%
 		\setcounter{temp}{\subtask}
@@ -333,7 +333,9 @@ Korrektur-Status:\\[2pt]
 \ifthenelse{\boolean{showsubtaskboxes}}{%
 \vfill
 \enlargethispage{3\baselineskip}%
+\ifthenelse{\totvalue{totalpoints} > 0}{
 \makesubtasktable%
+}{\textbf{Neu kompilieren, um Korrekturtabelle anzuzeigen!}}
 }{}
 \end{addmargin}
 \end{titlepage}

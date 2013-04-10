@@ -15,7 +15,7 @@
 \RequirePackage[margin=2cm,a4paper,ignorehead,headsep=1.2cm]{geometry}
 
 \RequirePackage{graphicx}
-\RequirePackage{hyperref}
+\RequirePackage[hidelinks]{hyperref}
 
 \definecolor{uulm}{RGB}{130,161,180}
 \definecolor{uulm-akzent}{rgb}{.663,.635,.553}

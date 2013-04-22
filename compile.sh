@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-EXAMPLES="exam"
+EXAMPLES="assignment exam quiz"
 
 function error() {
 	echo "Please install latexmk to compile."

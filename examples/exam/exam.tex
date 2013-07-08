@@ -1,4 +1,5 @@
-\documentclass{uulm-exam}
+\documentclass{../../uulm-exam}
+%\documentclass[milogo]{../../uulm-exam}
 
 \usepackage{algorithmic}
 \usepackage{tabularx}
@@ -22,11 +23,13 @@
 \setboolean{showbonus}{true}
 % Zeige Felder für Korrekturstatus in Unteraufgaben-Granularität, füge Felder für Korrektur-Zeichen pro Unteraufgabe hinzu
 \setboolean{showsubtaskboxes}{true}
+% Zeige Barcodes auf jeder Seite
+\setboolean{showbarcodes}{false}
 
 \begin{document}
 \mysecret{20} % Geheime Zahl, die Barcodes generiert um "gefaelschte" Blaetter zu verhindern - sollte je Klausur unterschiedlich sein
 \title{User Interface Softwaretechnologie}
-\date{04.04.2012}
+\date{08.07.2013}
 \institute{Institut für Medieninformatik}
 \duration{90 Minuten}
 \examiner{Prof. Michael Weber}
@@ -69,7 +72,7 @@ Ein beidseitig handbeschriebenes DIN-A4-Blatt.
 \end{assignments}
 
 % Zusatzblätter
-\identifier{UIST 2007}
+\identifier{UIST 2013}
 \newpage
 \makeemptysheet
 \makeemptysheet

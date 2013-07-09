@@ -479,6 +479,9 @@ Korrektur-Status:\\[2pt]
 % PGF commands, generated using http://sourceforge.net/projects/eps2pgf/
 % ---------------------------------------------------------------------------
 
+% parameter #1: influences the color of the logo, i.e. "black" or "uulm" (corporate design blue)
+% parameter #2: "true" stretches the logo, so the icon is on the left and "uulm" is on the right, otherwise
+% both parts are next to each other
 \newcommand\uulmlogo[2]{
 \begin{pgfpicture}
 \pgftransformscale{20mm/40mm}

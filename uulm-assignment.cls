@@ -9,6 +9,7 @@
 \RequirePackage{enumitem}
 \RequirePackage{ifthen}
 \RequirePackage{tikz}
+\RequirePackage{chngpage}
 
 \RequirePackage[english,ngerman]{babel}
 

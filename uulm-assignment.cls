@@ -11,7 +11,8 @@
 \RequirePackage{forloop}
 \RequirePackage{tikz}
 \RequirePackage{chngpage}
-\RequirePackage{xargs}
+\RequirePackage{xparse}
+\RequirePackage{calc}
 
 \RequirePackage[english,ngerman]{babel}
 
@@ -118,35 +119,39 @@
 \newcounter{solutionlines}
 \def\@papertype{lines}% or blank or squared
 \newsavebox{\solutionbox}%
-\newenvironmentx{solution}[2][2=lines]{%
+\NewDocumentEnvironment{solution}{ O{0} O{lines} }{%
 \par%
 \setcounter{solutionlines}{#1}%
 \def\@papertype{#2}%
 \begin{lrbox}{\solutionbox}
-\begin{minipage}{.9\textwidth}
-\color{red}\textbf{Lösung:}
-\par
+\begin{minipage}{\textwidth - 2em}
+% \color{red}\textbf{Lösung:}
+% \par
 }{
 \end{minipage}
 \end{lrbox}
 \ifthenelse{\boolean{showsolutions}}{%
-	\fbox{%
-		\usebox{\solutionbox}
-	}
+    \begin{tikzpicture}
+        \node[fill=uulm-in!20,inner sep=1em,minimum width=\textwidth]
+            (box)
+            {\usebox{\solutionbox}};
+        % \node[anchor=north east,fill=uulm-in,text=white] at (box.north east) {Lösung};
+    \end{tikzpicture}
+    \color{uulm-in!50!black}
 }{%showsolutions off
-	\ifthenelse{\equal{\thesolutionlines}{0}}{
-		\par% leave no space at all for solution
-	}{%else
-		\ifthenelse{\equal{\@papertype}{lines}}{
-			\insertlines{\thesolutionlines}
-		}{}
-		\ifthenelse{\equal{\@papertype}{blank}}{
-			\answerspace{\thesolutionlines}
-		}{}
-		\ifthenelse{\equal{\@papertype}{squared}}{
-			\insertsquared{\thesolutionlines}
-		}{}
-	}%if leave space
+    \ifthenelse{\equal{\thesolutionlines}{0}}{
+        \par% leave no space at all for solution
+    }{%else
+        \ifthenelse{\equal{\@papertype}{lines}}{
+            \insertlines{\thesolutionlines}
+        }{}
+        \ifthenelse{\equal{\@papertype}{blank}}{
+            \answerspace{\thesolutionlines}
+        }{}
+        \ifthenelse{\equal{\@papertype}{squared}}{
+            \insertsquared{\thesolutionlines}
+        }{}
+    }%if leave space
 }%if show solutions
 }%environment
 
@@ -170,8 +175,8 @@
 \newcommand{\insertsquared}[1]{%
 	\vspace*{1em}
 	\par\noindent\tikz[x=1.2em,y=1.2em]{%
-		\draw[step=1.0,lines] (0,0) grid (0.974\linewidth,#1);
-		\draw[lines] (0.974\linewidth,0) -- (0.974\linewidth,#1);
+		\draw[step=1.0,lines] (0,0) grid (\linewidth,#1);
+		\draw[lines] (\linewidth,0) -- (\linewidth,#1);
 }
 }
 

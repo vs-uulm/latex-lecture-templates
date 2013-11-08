@@ -8,8 +8,10 @@
 \RequirePackage[utf8]{inputenc}% Can use é instead of \'e (all OSs)
 \RequirePackage{enumitem}
 \RequirePackage{ifthen}
+\RequirePackage{forloop}
 \RequirePackage{tikz}
 \RequirePackage{chngpage}
+\RequirePackage{xargs}
 
 \RequirePackage[english,ngerman]{babel}
 
@@ -109,17 +111,80 @@
 	\@studentdata
 }
 
-% Definition for 'solution' with two parameters: The first parameter is what students see, so most likely this should be some empty space to fill in the answer. The second parameter is what the supervisors can see when compiling with the 'showsolutions' boolean set to true.
+% Solutions
 \newboolean{showsolutions}
 \setboolean{showsolutions}{false}
-\def\@solution{\vspace{3cm}}{} % default empty
-\newcommand{\solution}[2]{
-\ifthenelse{\boolean{showsolutions}}
-{\begin{adjustwidth}{2cm}{2cm}
-{\color{red}\textbf{Antwort: \\} #2}
-\end{adjustwidth}}
-{#1}
+
+\newcounter{solutionlines}
+\def\@papertype{lines}% or blank or squared
+\newsavebox{\solutionbox}%
+\newenvironmentx{solution}[2][2=lines]{%
+\par%
+\setcounter{solutionlines}{#1}%
+\def\@papertype{#2}%
+\begin{lrbox}{\solutionbox}
+\begin{minipage}{.9\textwidth}
+\color{red}\textbf{Lösung:}
+\par
+}{
+\end{minipage}
+\end{lrbox}
+\ifthenelse{\boolean{showsolutions}}{%
+	\fbox{%
+		\usebox{\solutionbox}
+	}
+}{%showsolutions off
+	\ifthenelse{\equal{\thesolutionlines}{0}}{
+		\par% leave no space at all for solution
+	}{%else
+		\ifthenelse{\equal{\@papertype}{lines}}{
+			\insertlines{\thesolutionlines}
+		}{}
+		\ifthenelse{\equal{\@papertype}{blank}}{
+			\answerspace{\thesolutionlines}
+		}{}
+		\ifthenelse{\equal{\@papertype}{squared}}{
+			\insertsquared{\thesolutionlines}
+		}{}
+	}%if leave space
+}%if show solutions
+}%environment
+
+% Antwortraeume
+
+\newcounter{lines}%
+\tikzset{lines/.style={very thin, black!40}}
+
+%% Linien
+\newcommand{\insertlines}[1]{%
+	\vspace*{1em}
+\forloop{lines}{0}{\value{lines} < #1}{%
+		\par\noindent\tikz[x=\linewidth,y=1.2em]{%
+			\path (0,0) rectangle (1,1);
+			\draw[lines] (0,0) -- (0.99,0);
+		}
+	}
 }
+
+%% Karos
+\newcommand{\insertsquared}[1]{%
+	\vspace*{1em}
+	\par\noindent\tikz[x=1.2em,y=1.2em]{%
+		\draw[step=1.0,lines] (0,0) grid (0.974\linewidth,#1);
+		\draw[lines] (0.974\linewidth,0) -- (0.974\linewidth,#1);
+}
+}
+
+%% Blanko
+\newcommand{\answerspace}[1]{%
+	\vspace*{1em}
+\forloop{lines}{0}{\value{lines} < #1}{%
+		\par\noindent\tikz[x=\linewidth,y=1.2em]{%
+			\path (0,0) rectangle (0.97,1);
+		}
+}
+}
+
 
 %% Definition for 'task' (an exercise) with parameters: type, name, points
 \newcommand{\task}[3]{

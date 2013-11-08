@@ -132,7 +132,7 @@
 \end{lrbox}
 \ifthenelse{\boolean{showsolutions}}{%
     \begin{tikzpicture}
-        \node[fill=uulm-in!20,inner sep=1em,minimum width=\textwidth]
+        \node[fill=uulm-in!10,draw=uulm-in,inner sep=1em,minimum width=\textwidth]
             (box)
             {\usebox{\solutionbox}};
         % \node[anchor=north east,fill=uulm-in,text=white] at (box.north east) {Lösung};

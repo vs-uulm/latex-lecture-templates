@@ -217,12 +217,18 @@
 \clearscrheadfoot
 \renewcommand\headfont{\normalfont}
 \chead{%
-\begin{tikzpicture}[overlay]
-\fill[uulm-akzent!40] (-11,0) rectangle (11,8mm);
-\fill[uulm-in] (-11,0) rectangle (-10.5+1.8,8mm);
-\node[text=white,minimum width=1.8cm,inner sep=0,minimum height=8mm] at (-9.6,3.5mm) {\pagemark\vphantom{$|$My}}; %phantom to compensate baseline alignment
-\node[text=uulm-akzent!50!black,right,inner sep=0,minimum height=8mm] at (-8.5,3.5mm) {\@course{} $|$ \@title};
-\end{tikzpicture}
+\ifthenelse{\boolean{nocolor}}{%
+    \@course{} $|$ \@title
+    \hfill
+    \pagemark
+}{% color
+    \begin{tikzpicture}[overlay]
+    \fill[uulm-akzent!40] (-11,0) rectangle (11,8mm);
+    \fill[uulm-in] (-11,0) rectangle (-10.5+1.8,8mm);
+    \node[text=white,minimum width=1.8cm,inner sep=0,minimum height=8mm] at (-9.6,3.5mm) {\pagemark\vphantom{$|$My}}; %phantom to compensate baseline alignment
+    \node[text=uulm-akzent!50!black,right,inner sep=0,minimum height=8mm] at (-8.5,3.5mm) {\@course{} $|$ \@title};
+    \end{tikzpicture}
+}
 }
 
 \pagestyle{scrheadings}

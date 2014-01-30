@@ -187,13 +187,12 @@
 			\hline
 			\small Erreicht & \forloop{tab}{1}{\value{tab} < \thenums}{\hspace*{0.55cm} &} \hspace*{0.8cm}\parbox[0pt][2em][c]{0cm}{} \\
 			\hline
-			\small Zeichen & \forloop{tab}{1}{\value{tab} < \thenums}{&} \parbox[0pt][2em][c]{0cm}{}
-			\ifthenelse{\boolean{showsubtaskboxes}}{\\
-				\noalign{\hrule height 1pt}
-				& \forloop{tab}{1}{\value{tab} < \thenums}{&} \parbox[0pt][2em][c]{0cm}\\
- 				\hline
-				& \forloop{tab}{1}{\value{tab} < \thenums}{&} \parbox[0pt][2em][c]{0cm}{}}{}\\
- 			\hline
+			\small Zeichen & \forloop{tab}{1}{\value{tab} < \thenums}{&} \parbox[0pt][2em][c]{0cm}{}\\
+			\noalign{\hrule height 1pt}
+			& \forloop{tab}{1}{\value{tab} < \thenums}{&} \parbox[0pt][2em][c]{0cm}{}\\
+			\hline
+			& \forloop{tab}{1}{\value{tab} < \thenums}{&} \parbox[0pt][2em][c]{0cm}{}\\
+			\hline
 		\end{tabular}
 	\end{center}
 }
@@ -236,18 +235,19 @@ Korrektur-Status:\\[2pt]
 	\definecolor{hellgrau}{rgb}{0.85,0.85,0.85}
 	\definecolor{rahmengrau}{rgb}{0.8,0.8,0.8}
 
+	\vspace*{-1.5cm}
 	\ifthenelse{\boolean{milogo}}{%
 	 	\milogo\hfill\uulmlogo{uulm}{false}
 	}{
 		\uulmlogo{black}{true}
 	}%
 
-	\vfill
+	%\vfill
 	\small
 	\begin{center}
 		\Large{Klausur \textbf{\@title}}
 	\end{center}
-	\vfill
+	%\vfill
 	
 	\colorbox{hellgrau}{
 		\begin{minipage}{\textwidth-1.2em}

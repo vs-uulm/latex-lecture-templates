@@ -242,13 +242,11 @@ Korrektur-Status:\\[2pt]
 		\uulmlogo{black}{true}
 	}%
 
-	%\vfill
 	\small
 	\begin{center}
 		\Large{Klausur \textbf{\@title}}
 	\end{center}
-	%\vfill
-	
+
 	\colorbox{hellgrau}{
 		\begin{minipage}{\textwidth-1.2em}
 			\begin{tabular}{llll}

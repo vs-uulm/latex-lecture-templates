@@ -1,0 +1,57 @@
+\documentclass[german]{thesistopic}	%Briefe auf Deutsch müssen die Option
+% [german] enthalten
+\usepackage{ngerman}
+\usepackage{url}
+\usepackage[unicode]{hyperref}
+\usepackage{footmisc}
+\usepackage[ngerman]{babel}
+
+\usepackage{xunicode} % windows
+% \usepackage{fontspec}
+\usepackage{etex}
+\usepackage{xltxtra}
+
+%\setsansfont{FiraSansOT-Regular.otf}
+%seems not to work, 
+
+\hypersetup{
+  linkcolor=black,
+  urlcolor=black,
+  colorlinks=true
+}
+
+\include{advisor}			% Daten des Absenders
+
+\germandescription
+%\englishdescription			% for  letter in English
+
+
+
+%\renewcommand\footnotelayout{\fontfamily{0mt}\selectfont}
+
+\begin{document}
+\begin{letter}{~\\~\\~\\\vspace*{3cm}}
+		%{\fontsize{14}{18}\selectfont
+%		\textbf{
+%	}\bigskip\\\vspace{.5cm}
+
+
+\opening{\noindent{\large{}Bachelor-Arbeit}\newline
+Design \& Durchführung einer Benutzerstudie zur Nutzung von Netzwerksimulatoren}
+
+%\large \textbf{Kategorie} Master Arbeit\bigskip
+
+Eine Herausforderung bei dem Entwurf, der Entwicklung sowie der Evaluation von Netzwerkprotokollen, Netzwerkanwendungen und Netzwerkkomponenten ist die Durchführung von Tests.
+Insbesondere bei der Fahrzeug-Fahrzeug-Kommunikation ist es so einfach nicht möglich, reale Tests mit echten Fahrzeugen durchzuführen, um Mechanismen in frühen Entwicklungsphasen zu testen.
+Als Lösung hierfür werden Simulationen verwendet, die eine geeignete und realistische Testumgebung bereitstellen und somit kostengünstige, effiziente und einfache Tests ermöglichen. Im Bereich der Netzwerksimulation werden vor allem diskrete, ereignisbasierte Modelle verwendet, die reproduzierbare Simulationen auf einer globalen Zeitachse durchführen. 
+
+Für solche Simulationen gibt es verschiedene Frameworks und Engines, mit denen Tests und Evaluationen in der Praxis durchgeführt werden. Eine wesentlicher Faktor für den Erfolg solcher Simulation ist Benutzbarkeit dieser Tools, Komplexität der Abstraktionen und Aufwand der Simulationsentwicklung und Auswertung. 
+
+Im Rahmen dieser Arbeit soll eine Benutzerstudie durchgeführt werden, die sich mit diesen Faktoren befasst und offene Problemstellungen für Anwender von Netzwerksimulatoren identifiziert. Hierfür ist zunächst eine Einarbeitung in das Thema der Netzwerksimulatoren sowie ein grober Überblick über bestehende Tools notwendig. Anschließend sollen in Expertengesprächen wesentliche Probleme identifiziert werden, die mithilfe einer darauf aufbauenden empirischen Studie überprüft werden sollen.
+\bigskip
+
+\textbf{Kontaktperson bei Interesse: Henning Kopp} \\
+
+\end{letter}
+\end{document}
+

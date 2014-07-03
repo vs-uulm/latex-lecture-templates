@@ -10,6 +10,7 @@
 % \usepackage{fontspec}
 \usepackage{etex}
 \usepackage{xltxtra}
+\usepackage{pst-barcode}
 
 \setsansfont{FiraSansOT}
 
@@ -50,6 +51,10 @@ Im Rahmen dieser Arbeit soll eine Benutzerstudie durchgeführt werden, die sich 
 \bigskip
 
 \textbf{Kontaktperson bei Interesse: Henning Kopp} \\
+\begin{pspicture}(1in,1in)
+  \psbarcode{https://www.uni-ulm.de/in/vs/persons/kopp.html}{}{qrcode}
+\end{pspicture}
+
 
 \end{letter}
 \end{document}

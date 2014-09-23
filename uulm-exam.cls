@@ -1,4 +1,4 @@
-\ProvidesClass{uulm-exam}[2013/07/07 Klausur LaTeX Klasse der Uni Ulm]
+\ProvidesClass{uulm-exam}[2014/09/23 Klausur LaTeX Klasse der Uni Ulm]
 
 \LoadClass[11pt,a4paper,oneside,titlepage]{scrartcl}
 
@@ -19,7 +19,7 @@
 \RequirePackage{colortbl}
 \RequirePackage{booktabs}
 \RequirePackage{listings}
-\RequirePackage{fancyhdr}
+\RequirePackage{scrpage2}
 \RequirePackage{textcomp}
 \RequirePackage{longtable}
 \RequirePackage{enumerate}
@@ -74,7 +74,7 @@
 % layout
 \setlength{\parindent}{0cm}
 \setlength{\parskip}{1ex}
-\setlength{\headheight}{14pt}
+\setlength{\headheight}{16pt}
 \renewcommand{\baselinestretch}{1.05}
 
 \newboolean{milogo}\setboolean{milogo}{false}
@@ -104,11 +104,14 @@
 }
 
 % running headers
-\pagestyle{fancy}
-\fancyhead{\sffamily\fontsize{10pt}{10pt}\selectfont\@title \hfill \@date}
-\fancyfoot{}% delete the default footer
-\fancyfoot[C]{\hspace*{1.5cm}\sffamily\fontsize{10pt}{10pt}\selectfont\thepage/\pageref{LastPage}}
-\fancyfoot[R]{%
+% use scrpage2 instead of fancyheaders with is optimized for komascript styles
+\pagestyle{scrheadings}
+\clearscrheadfoot
+\ihead{{\sffamily\fontsize{10pt}{10pt}\selectfont\upshape\@title}}
+\ohead{\sffamily\fontsize{10pt}{10pt}\selectfont\upshape\@date}
+\setheadsepline{0.4pt}
+\cfoot{\hspace*{1.5cm}\upshape\thepage/\pageref{LastPage}}
+\ofoot{%
 \sffamily\fontsize{10pt}{10pt}\selectfont%
 \barcode
 }
@@ -281,20 +284,19 @@ Korrektur-Status:\\[2pt]
 			nehme ich hiermit zur Kenntnis, dass diese Prüfung nicht gewertet
 			werden wird.
 
-			\vspace{2.5em}
+			\vspace{3.5em}
 			\renewcommand{\arraystretch}{1}
 			\ifthenelse{\boolean{showcodeword}}%
-			{\begin{tabular*}{.9\textwidth}{lll}
+			{\begin{tabular}{p{.4\textwidth}p{.1\textwidth}p{.4\textwidth}}
 				\hspace{.4\textwidth}& \hspace{.1\textwidth} & \hspace{.4\textwidth} \\
 				\cmidrule{1-1} \cmidrule(l){3-3}
 				\footnotesize{Unterschrift des Prüfungsteilnehmers}  & & \footnotesize{Optionales Codewort für den Aushang} \\
-			\end{tabular*}			
+			\end{tabular}			
 			}{%
-			\begin{tabular*}{.9\textwidth}{l}
-				\hspace{.4\textwidth}\\
+			\begin{tabular}{p{.4\textwidth}}
 				\cmidrule{1-1}
 				\footnotesize{Unterschrift des Prüfungsteilnehmers} \\
-			\end{tabular*}
+			\end{tabular}
 			}
 		\end{minipage}
 	}
@@ -397,7 +399,7 @@ Korrektur-Status:\\[2pt]
 \setcounter{solutionlines}{#1}%
 \def\@papertype{#2}%
 \begin{lrbox}{\solutionbox}
-\begin{minipage}{.9\textwidth}
+\begin{minipage}{.99\textwidth}
 \color{red}\textbf{Lösung:}
 \par
 }{
@@ -412,14 +414,14 @@ Korrektur-Status:\\[2pt]
 		\par% leave no space at all for solution
 	}{%else
 		\ifthenelse{\equal{\@papertype}{lines}}{
-			\insertlines{\thesolutionlines}
+ 			\insertlines{\thesolutionlines}
 		}{}
 		\ifthenelse{\equal{\@papertype}{blank}}{
 			\answerspace{\thesolutionlines}
 		}{}
 		\ifthenelse{\equal{\@papertype}{squared}}{
 			\insertsquared{\thesolutionlines}
-		}{}
+		}{}%
 	}%if leave space
 }%if show solutions
 }%environment
@@ -447,8 +449,8 @@ Korrektur-Status:\\[2pt]
 	\vspace*{1em}
 \forloop{lines}{0}{\value{lines} < #1}{%
 		\par\noindent\tikz[x=\linewidth,y=1.2em]{%
-			\path (0,0) rectangle (1,1);
-			\draw[lines] (0,0) -- (0.99,0);
+			\path (0,0) rectangle (0.97,1);
+ 			\draw[lines] (0,0) -- (0.97,0);
 		}
 	}
 }

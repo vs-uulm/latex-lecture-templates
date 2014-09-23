@@ -190,11 +190,12 @@
 			\hline
 			\small Erreicht & \forloop{tab}{1}{\value{tab} < \thenums}{\hspace*{0.55cm} &} \hspace*{0.8cm}\parbox[0pt][2em][c]{0cm}{} \\
 			\hline
-			\small Zeichen & \forloop{tab}{1}{\value{tab} < \thenums}{&} \parbox[0pt][2em][c]{0cm}{}\\
+			\small Zeichen & \forloop{tab}{1}{\value{tab} < \thenums}{&} \parbox[0pt][2em][c]{0cm}{}
+			\ifthenelse{\boolean{showsubtaskboxes}}{\\
 			\noalign{\hrule height 1pt}
 			& \forloop{tab}{1}{\value{tab} < \thenums}{&} \parbox[0pt][2em][c]{0cm}{}\\
 			\hline
-			& \forloop{tab}{1}{\value{tab} < \thenums}{&} \parbox[0pt][2em][c]{0cm}{}\\
+				& \forloop{tab}{1}{\value{tab} < \thenums}{&} \parbox[0pt][2em][c]{0cm}{}}{}\\
 			\hline
 		\end{tabular}
 	\end{center}
@@ -228,6 +229,7 @@ Korrektur-Status:\\[2pt]
 \newboolean{showcodeword}
 \newboolean{showbonus}
 \newboolean{showsubtaskboxes}
+\setboolean{showsubtaskboxes}{true}
 
 \renewcommand\maketitle{%
 \begin{titlepage}

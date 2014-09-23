@@ -55,8 +55,8 @@
 % settings for code listings
 \lstset{
 	language=JAVA,
-	basicstyle=\tt\small,
-	keywordstyle=\bfseries,
+	basicstyle=\ttfamily\small,
+	keywordstyle=\mdseries, %\bfseries creates warning about missing font and therefore has no influence on font selection
 	stringstyle=\ttfamily,
 	commentstyle=\color{middlegray},
 	showstringspaces=false,
@@ -399,7 +399,7 @@ Korrektur-Status:\\[2pt]
 \setcounter{solutionlines}{#1}%
 \def\@papertype{#2}%
 \begin{lrbox}{\solutionbox}
-\begin{minipage}{.99\textwidth}
+\begin{minipage}{.9\textwidth}
 \color{red}\textbf{Lösung:}
 \par
 }{

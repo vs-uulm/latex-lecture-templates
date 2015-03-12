@@ -31,6 +31,13 @@
 \RequirePackage{pgf}
 \RequirePackage{tikz}
 \usetikzlibrary{chains}
+\usetikzlibrary{plotmarks}
+\usetikzlibrary{shapes}
+\usetikzlibrary{matrix}
+\usetikzlibrary{calc,arrows,positioning}
+
+\RequirePackage{multicol}
+
 
 \RequirePackage{forloop}
 \RequirePackage{ifthen}
@@ -475,6 +482,30 @@ Korrektur-Status:\\[2pt]
 		}
 }
 }
+
+% Multiple choice boxes
+\newcommand{\boxes}[0]{$\boxvoid$\hspace{0.4cm}$\boxvoid$ }
+\newcommand{\Falsch}[0]{$\boxvoid$\hspace{0.4cm}$\boxtimes$\\}
+\newcommand{\Wahr}[0]{$\boxtimes$\hspace{0.4cm}$\boxvoid$\\}
+
+% copied from the mathabx package, as allowed under the LaTeX Project Public License.
+% see https://www.ctan.org/pkg/mathabx where the sources can be downloaded
+\DeclareFontFamily{U}{mathb}{\hyphenchar\font45}
+\DeclareFontShape{U}{mathb}{m}{n}{
+      <5> <6> <7> <8> <9> <10>
+      <10.95> <12> <14.4> <17.28> <20.74> <24.88>
+      mathb10
+      }{}
+\DeclareSymbolFont{mathb}{U}{mathb}{m}{n}
+\DeclareFontSubstitution{U}{mathb}{m}{n}
+\DeclareMathSymbol{\boxtimes}     {2}{mathb}{"62}
+\DeclareMathSymbol{\boxvoid}     {2}{mathb}{"6C}
+%% end of code from the mathabx package
+
+% default texts
+\newcommand{\cw}[1]{\indent\hspace{0.2cm}$\boxvoid$\hspace{0.4cm}$\boxvoid$\hspace{0.1cm} #1 \\}
+\newcommand{\cwheader}[0]{\indent\rotatebox{60}{wahr}\rotatebox{60}{falsch}\newline}
+\newcommand{\cwbla}[0]{(je Aussage: 1 Punkt bei korrekter Antwort, 1 Punkt Abzug bei inkorrekter Antwort, 0 Punkte bei fehlender Antwort; mind. 0 Punkte f\"ur die gesamte Teilaufgabe)}
 
 
 % ---------------------------------------------------------------------------

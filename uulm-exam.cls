@@ -476,6 +476,37 @@ Korrektur-Status:\\[2pt]
 }
 }
 
+% Multiple Choice
+\newenvironment{multiplechoice}{%
+	\begingroup
+	\renewcommand{\arraystretch}{1.2}
+	\begin{tabular}[t]{p{0.025\textwidth}p{0.025\textwidth}p{0.82\textwidth}}
+
+	\rotatebox{60}{wahr} & \rotatebox{60}{falsch} \\
+	\arrayrulecolor{gray!40}\hline
+}{%
+	\arrayrulecolor{gray!40}\hline
+	\end{tabular}
+	\endgroup
+}
+\newcommand{\choiceitem}[2]{%
+
+\ifthenelse{\boolean{showsolutions}}
+	{%bei showsolutions korrekte Kreuze setzen 
+			  \ifnum\pdf@strcmp{\unexpanded{#1}}{wahr}=0 %
+				 \expandafter\@firstoftwo
+			  \else
+				\expandafter\@secondoftwo
+			  \fi
+				  {\textcolor{red}{$\boxtimes$} & $\Box$} %wahr
+				  {$\Box$ & \textcolor{red}{$\boxtimes$}} %falsch
+			   & #2 \\
+
+	}{%ansonsten nur die Boxen zum Ankreuzen
+			   $\Box$ & $\Box$ & #2 \\
+	}
+}
+
 
 % ---------------------------------------------------------------------------
 % PGF commands, generated using http://sourceforge.net/projects/eps2pgf/

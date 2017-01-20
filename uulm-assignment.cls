@@ -197,7 +197,7 @@
                       % springen und subtask counter resetted werden.
 \addpenalty{\@secpenalty}%
 \addvspace{10pt}
-{\Large \textbf{#1 \arabic{task}: #2}}\hfill{\normalsize (#3)}%
+{\Large \textbf{#1 \arabic{task}: #2}}\hfill{\normalsize \ifthenelse{\equal{#3}{}}{}{(#3)}}%
 \addcontentsline{toc}{section}{\arabic{task} - #2}
 \par
 }

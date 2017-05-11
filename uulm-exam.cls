@@ -1,7 +1,10 @@
-\ProvidesClass{uulm-exam}[2014/09/23 Klausur LaTeX Klasse der Uni Ulm]
+\ProvidesClass{uulm-exam}[2016/07/26 Klausur LaTeX Klasse der Uni Ulm]
 
 \LoadClass[11pt,a4paper,oneside,titlepage]{scrartcl}
 
+\RequirePackage{etex}
+\RequirePackage{cmbright}
+\RequirePackage{pdfpages}
 \RequirePackage{geometry}
 \geometry{top=2.5cm,left=1.3cm,right=3.3cm,bottom=2.25cm}
 \RequirePackage{ngerman}
@@ -28,14 +31,17 @@
 \RequirePackage{refcount}
 \RequirePackage{xargs}
 \RequirePackage{enumitem}
+\RequirePackage{wasysym}
 \RequirePackage{pgf}
 \RequirePackage{tikz}
+\RequirePackage[outline]{contour}
 \usetikzlibrary{chains}
 
 \RequirePackage{forloop}
 \RequirePackage{ifthen}
 \RequirePackage{suffix}
 \RequirePackage{lastpage}
+\RequirePackage{eso-pic}
 
 \RequirePackage[pdftex,
 	unicode=true,
@@ -72,6 +78,7 @@
 }
 
 % layout
+\renewcommand{\ttdefault}{lmtt}
 \setlength{\parindent}{0cm}
 \setlength{\parskip}{1ex}
 \setlength{\headheight}{16pt}
@@ -137,11 +144,11 @@
 \addtocounter{subtasks}{1}%
 \addtocounter{totalpoints}{#1}%
 \ifthenelse{\boolean{showsubtaskboxes}}{%
-\marginpar{\begin{tikzpicture}[align]
+\marginpar{\begin{tikzpicture}[blalign]
 \node[xscale=1.66,ptbox,path picture={\draw (0,-1em)--(4pt,1em);}] {};
 \end{tikzpicture}}%
 }{%
-\marginpar{\tikz[align]\node[ptbox] {};}%
+\marginpar{\tikz[blalign]\node[ptbox] {};}%
 }%
 }
 
@@ -207,7 +214,7 @@ Korrektur-Status:\\[2pt]
 \newcounter{temp}%
 \begin{tikzpicture}[start chain=going right,node distance=0]
 \foreach \task in {1,...,\totvalue{assignment}}{%
-	\node[on chain,fill=black,text=white,draw,minimum width=2em,minimum height=1.5em] {\task};
+	\node[on chain,fill=black,text=white,draw,minimum width=2em,minimum height=1.5em] {\contour{white}{\textcolor{white}{\task}}};
 	\foreach \subtask in {1,...,\getsubtasks{\task}} {%
 		\setcounter{temp}{\subtask}
 		\node[on chain,draw,minimum width=1.333em,minimum height=1.5em] {\Alph{temp}};
@@ -236,7 +243,7 @@ Korrektur-Status:\\[2pt]
 \begin{addmargin}[1cm]{-1cm}
 	\thispagestyle{empty}
 
-	\definecolor{dunkelgrau}{rgb}{0.7,0.7,0.7}
+	\definecolor{dunkelgrau}{rgb}{0.82,0.82,0.82}
 	\definecolor{hellgrau}{rgb}{0.85,0.85,0.85}
 	\definecolor{rahmengrau}{rgb}{0.8,0.8,0.8}
 
@@ -253,7 +260,7 @@ Korrektur-Status:\\[2pt]
 	\end{center}
 
 	\colorbox{hellgrau}{
-		\begin{minipage}{\textwidth-1.2em}
+		\begin{minipage}{\textwidth-1em}
 			\begin{tabular}{llll}
 				Datum und Uhrzeit: & \@date & Bearbeitungszeit: & \@duration \\
 				Institut: & \@institute & Prüfer: & \@examiner \\
@@ -262,7 +269,7 @@ Korrektur-Status:\\[2pt]
 	}
 
 	\colorbox{hellgrau}{
-		\begin{minipage}{\textwidth-1.2em}
+		\begin{minipage}{\textwidth-1em}
 			\vspace*{0.1cm}
 			\textbf{Vom Prüfungsteilnehmer auszufüllen:}
 			\vspace*{0.2cm}
@@ -272,7 +279,7 @@ Korrektur-Status:\\[2pt]
 			\setlength{\belowrulesep}{0pt}
 
 			{\setlength{\tabcolsep}{0pt}
-			\begin{tabular}{lp{5.1cm}p{1ex}lp{4.2cm}p{1ex}l}
+			\begin{tabular}{lp{5.2cm}p{1ex}lp{4.2cm}p{1ex}l}
 				Name: &   & & Vorname: &  & & \cellcolor{dunkelgrau} Matrikelnummer:~ \\
 				\cmidrule(l){2-2}\cmidrule(l){5-5}
 				Studiengang: & &  & Abschluss: & & & \cellcolor{dunkelgrau} \\
@@ -286,19 +293,20 @@ Korrektur-Status:\\[2pt]
 			nehme ich hiermit zur Kenntnis, dass diese Prüfung nicht gewertet
 			werden wird.
 
-			\vspace{3.5em}
+			\vspace{2.5em}
 			\renewcommand{\arraystretch}{1}
 			\ifthenelse{\boolean{showcodeword}}%
-			{\begin{tabular}{p{.4\textwidth}p{.1\textwidth}p{.4\textwidth}}
+			{\begin{tabular*}{.9\textwidth}{lll}
 				\hspace{.4\textwidth}& \hspace{.1\textwidth} & \hspace{.4\textwidth} \\
 				\cmidrule{1-1} \cmidrule(l){3-3}
 				\footnotesize{Unterschrift des Prüfungsteilnehmers}  & & \footnotesize{Optionales Codewort für den Aushang} \\
-			\end{tabular}			
+			\end{tabular*}			
 			}{%
-			\begin{tabular}{p{.4\textwidth}}
+			\begin{tabular*}{.9\textwidth}{l}
+				\hspace{.4\textwidth}\\
 				\cmidrule{1-1}
 				\footnotesize{Unterschrift des Prüfungsteilnehmers} \\
-			\end{tabular}
+			\end{tabular*}
 			}
 		\end{minipage}
 	}
@@ -306,7 +314,7 @@ Korrektur-Status:\\[2pt]
 	\normalsize\textbf{Hinweise zur Prüfung:}
 	\par
 	\usebox{\hintsbox}
-% 	\hfill
+	\hfill
 	\setlength{\fboxrule}{0.5pt}
 	\setlength{\fboxsep}{7pt}
 	\fcolorbox{rahmengrau}{white}{
@@ -319,7 +327,7 @@ Korrektur-Status:\\[2pt]
 	\usebox{\toolsbox}
 	\vfill
 	\colorbox{hellgrau}{
-		\begin{minipage}{\textwidth-1.9em}
+		\begin{minipage}{\textwidth-2em}
 			\textbf{Vom Prüfer auszufüllen:}\hfill\barcode
 			\par\vspace*{0.4cm}
 			\ifthenelse{\totvalue{totalpoints} > 0}{
@@ -366,7 +374,7 @@ Korrektur-Status:\\[2pt]
 \newcounter{subtasks}[assignment]
 
 \tikzstyle{ptbox}=[inner sep=0,minimum width=3em,minimum height=2em,draw]
-\tikzstyle{align}=[baseline=-.66ex]
+\tikzstyle{blalign}=[baseline=-.66ex]
 
 \newcommand{\assignment}[1]{%
 \clearpage
@@ -376,7 +384,7 @@ Korrektur-Status:\\[2pt]
 \refstepcounter{assignment}%
 \addpenalty{\@secpenalty}%
 \vspace*{0ex}{\Large\textbf{Aufgabe \arabic{assignment}:}~\textbf{#1}}\hfill\emph{(\getpoints{\theassignment}\,Punkte)}%
-\marginpar{\tikz[align]\node[ptbox] {};}%
+\marginpar{\tikz[blalign]\node[ptbox] {};}%
 \addcontentsline{toc}{section}{A\arabic{assignment}: #1}%
 \par
 }
@@ -401,7 +409,7 @@ Korrektur-Status:\\[2pt]
 \setcounter{solutionlines}{#1}%
 \def\@papertype{#2}%
 \begin{lrbox}{\solutionbox}
-\begin{minipage}{.9\textwidth}
+\begin{minipage}{\linewidth-3\fboxsep-2\fboxrule}
 \color{red}\textbf{Lösung:}
 \par
 }{
@@ -416,7 +424,7 @@ Korrektur-Status:\\[2pt]
 		\par% leave no space at all for solution
 	}{%else
 		\ifthenelse{\equal{\@papertype}{lines}}{
- 			\insertlines{\thesolutionlines}
+			\insertlines{\thesolutionlines}
 		}{}
 		\ifthenelse{\equal{\@papertype}{blank}}{
 			\answerspace{\thesolutionlines}
@@ -434,12 +442,33 @@ Korrektur-Status:\\[2pt]
 \newcommand\identifier[1]{\xdef\@identifier{#1}}
 
 \newcommand\makeemptysheet{%
-\clearpage
-\raggedright\textbf{Zusatzblatt zu Aufgabe \rule{2em}{0.5pt}:}
-\vfill
-\raggedleft\bfseries{\Huge\color{lightgray}\rotatebox{45}{\@identifier}}
-\newpage
+% do not make empty sheets for solution version
+\ifthenelse{\NOT \boolean{showsolutions}}{%
+	\clearpage
+	\raggedright\textbf{Zusatzblatt zu Aufgabe \rule{2em}{0.5pt}:}
+	\vfill
+	\raggedleft\bfseries{\Huge\color{lightgray}\rotatebox{45}{\@identifier}}
+	\newpage
+}%
+\relax
 }
+
+% Have a watermark saying "Musterlösung" on the pages
+\AtBeginDocument{
+	\ifshowsolutions
+		\AddToShipoutPictureFG*{
+			\AtTextCenter{
+				\tikz[transform canvas={scale=4}]{
+				\node[color=red,opacity=.66,rotate=45] at (.2,0) {
+					\textbf{
+						\makeatletter\@identifier\makeatother~$|$~Musterlösung}
+					}
+				}
+			}
+		}
+	\fi
+}
+
 
 % Antwortraeume
 
@@ -449,10 +478,10 @@ Korrektur-Status:\\[2pt]
 %% Linien
 \newcommand{\insertlines}[1]{%
 	\vspace*{1em}
-\forloop{lines}{0}{\value{lines} < #1}{%
+	\forloop{lines}{0}{\value{lines} < #1}{%
 		\par\noindent\tikz[x=\linewidth,y=1.2em]{%
-			\path (0,0) rectangle (0.97,1);
- 			\draw[lines] (0,0) -- (0.97,0);
+			\path (0,0) rectangle (1,1);
+			\draw[lines] (0,0) -- (1,0);
 		}
 	}
 }
@@ -461,19 +490,31 @@ Korrektur-Status:\\[2pt]
 \newcommand{\insertsquared}[1]{%
 	\vspace*{1em}
 	\par\noindent\tikz[x=1.2em,y=1.2em]{%
-		\draw[step=1.0,lines] (0,0) grid (0.974\linewidth,#1);
-		\draw[lines] (0.974\linewidth,0) -- (0.974\linewidth,#1);
-}
+		\draw[step=1.0,lines] (0,0) grid (\linewidth,#1);
+		\draw[lines] (\linewidth,0) -- (\linewidth,#1);
+	}
 }
 
 %% Blanko
 \newcommand{\answerspace}[1]{%
 	\vspace*{1em}
-\forloop{lines}{0}{\value{lines} < #1}{%
+	\forloop{lines}{0}{\value{lines} < #1}{%
 		\par\noindent\tikz[x=\linewidth,y=1.2em]{%
-			\path (0,0) rectangle (0.97,1);
+			\path (0,0) rectangle (1,1);
 		}
 }
+}
+
+%% Text fill-in 
+\newcommand{\wordline}[2][]{%
+	\tikz[x=#2,y=1.2em]{%
+		\path (0,0) rectangle (1,2);
+		\draw[lines] (0,0) -- (1,0);
+		
+		\ifshowsolutions %
+			\node[align=center, red, anchor=south] at (.5,0) {#1}
+		\fi
+	}
 }
 
 % Multiple Choice
@@ -489,22 +530,31 @@ Korrektur-Status:\\[2pt]
 	\end{tabular}
 	\endgroup
 }
-\newcommand{\choiceitem}[2]{%
 
-\ifthenelse{\boolean{showsolutions}}
+\newcommand{\choice}[2]{%
+	\ifthenelse{\boolean{showsolutions}}
 	{%bei showsolutions korrekte Kreuze setzen 
-			  \ifnum\pdf@strcmp{\unexpanded{#1}}{wahr}=0 %
-				 \expandafter\@firstoftwo
-			  \else
-				\expandafter\@secondoftwo
-			  \fi
-				  {\textcolor{red}{$\boxtimes$} & $\Box$} %wahr
-				  {$\Box$ & \textcolor{red}{$\boxtimes$}} %falsch
-			   & #2 \\
-
+		\ifnum\pdf@strcmp{\unexpanded{#1}}{wahr}=0 %
+		\expandafter\@firstoftwo
+		\else
+		\expandafter\@secondoftwo
+		\fi
+		{\textcolor{red}{$\XBox$} & $\Box$} %wahr
+		{$\Box$ & \textcolor{red}{$\XBox$}} %falsch
+		& #2 \\
+		
 	}{%ansonsten nur die Boxen zum Ankreuzen
-			   $\Box$ & $\Box$ & #2 \\
+		$\Box$ & $\Box$ & #2 \\
 	}
+}
+
+% Box. With red X only when showsolutions true
+\newcommand{\truebox}{ %
+	\ifshowsolutions
+		\textcolor{red}{$\XBox$}
+	\else
+		$\Square$
+	\fi
 }
 
 

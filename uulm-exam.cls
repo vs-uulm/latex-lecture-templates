@@ -260,7 +260,7 @@ Korrektur-Status:\\[2pt]
 	\end{center}
 
 	\colorbox{hellgrau}{
-		\begin{minipage}{\textwidth-1em}
+		\begin{minipage}{\textwidth-1.2em}
 			\begin{tabular}{llll}
 				Datum und Uhrzeit: & \@date & Bearbeitungszeit: & \@duration \\
 				Institut: & \@institute & Prüfer: & \@examiner \\
@@ -269,7 +269,7 @@ Korrektur-Status:\\[2pt]
 	}
 
 	\colorbox{hellgrau}{
-		\begin{minipage}{\textwidth-1em}
+		\begin{minipage}{\textwidth-1.2em}
 			\vspace*{0.1cm}
 			\textbf{Vom Prüfungsteilnehmer auszufüllen:}
 			\vspace*{0.2cm}
@@ -279,7 +279,7 @@ Korrektur-Status:\\[2pt]
 			\setlength{\belowrulesep}{0pt}
 
 			{\setlength{\tabcolsep}{0pt}
-			\begin{tabular}{lp{5.2cm}p{1ex}lp{4.2cm}p{1ex}l}
+			\begin{tabular}{lp{5.1cm}p{1ex}lp{4.2cm}p{1ex}l}
 				Name: &   & & Vorname: &  & & \cellcolor{dunkelgrau} Matrikelnummer:~ \\
 				\cmidrule(l){2-2}\cmidrule(l){5-5}
 				Studiengang: & &  & Abschluss: & & & \cellcolor{dunkelgrau} \\
@@ -293,20 +293,19 @@ Korrektur-Status:\\[2pt]
 			nehme ich hiermit zur Kenntnis, dass diese Prüfung nicht gewertet
 			werden wird.
 
-			\vspace{2.5em}
+			\vspace{3.5em}
 			\renewcommand{\arraystretch}{1}
 			\ifthenelse{\boolean{showcodeword}}%
-			{\begin{tabular*}{.9\textwidth}{lll}
+			{\begin{tabular}{p{.4\textwidth}p{.1\textwidth}p{.4\textwidth}}
 				\hspace{.4\textwidth}& \hspace{.1\textwidth} & \hspace{.4\textwidth} \\
 				\cmidrule{1-1} \cmidrule(l){3-3}
 				\footnotesize{Unterschrift des Prüfungsteilnehmers}  & & \footnotesize{Optionales Codewort für den Aushang} \\
-			\end{tabular*}			
+			\end{tabular}			
 			}{%
-			\begin{tabular*}{.9\textwidth}{l}
-				\hspace{.4\textwidth}\\
+			\begin{tabular}{p{.4\textwidth}}
 				\cmidrule{1-1}
 				\footnotesize{Unterschrift des Prüfungsteilnehmers} \\
-			\end{tabular*}
+			\end{tabular}
 			}
 		\end{minipage}
 	}
@@ -314,7 +313,7 @@ Korrektur-Status:\\[2pt]
 	\normalsize\textbf{Hinweise zur Prüfung:}
 	\par
 	\usebox{\hintsbox}
-	\hfill
+% 	\hfill
 	\setlength{\fboxrule}{0.5pt}
 	\setlength{\fboxsep}{7pt}
 	\fcolorbox{rahmengrau}{white}{
@@ -327,7 +326,7 @@ Korrektur-Status:\\[2pt]
 	\usebox{\toolsbox}
 	\vfill
 	\colorbox{hellgrau}{
-		\begin{minipage}{\textwidth-2em}
+		\begin{minipage}{\textwidth-1.9em}
 			\textbf{Vom Prüfer auszufüllen:}\hfill\barcode
 			\par\vspace*{0.4cm}
 			\ifthenelse{\totvalue{totalpoints} > 0}{

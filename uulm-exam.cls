@@ -1,4 +1,4 @@
-\ProvidesClass{uulm-exam}[2016/07/26 Klausur LaTeX Klasse der Uni Ulm]
+\ProvidesClass{uulm-exam}[2025/02/25 Klausur LaTeX Klasse der Uni Ulm]
 
 \LoadClass[11pt,a4paper,oneside,titlepage]{scrartcl}
 
@@ -7,7 +7,7 @@
 \RequirePackage{pdfpages}
 \RequirePackage{geometry}
 \geometry{top=2.5cm,left=1.3cm,right=3.3cm,bottom=2.25cm}
-\RequirePackage{ngerman}
+\RequirePackage[ngerman]{babel}
 \RequirePackage[utf8]{inputenc}
 \RequirePackage{epsf}
 \RequirePackage{array}
@@ -22,7 +22,7 @@
 \RequirePackage{colortbl}
 \RequirePackage{booktabs}
 \RequirePackage{listings}
-\RequirePackage{scrpage2}
+\RequirePackage{scrlayer-scrpage}
 \RequirePackage{textcomp}
 \RequirePackage{longtable}
 \RequirePackage{enumerate}

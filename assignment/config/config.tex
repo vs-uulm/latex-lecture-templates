@@ -1,0 +1,186 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                          Package Configs                              %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\microtypesetup{protrusion=true,expansion=true,tracking=true}
+
+\hypersetup{hidelinks,colorlinks=true,linkcolor=uulm-in-link,urlcolor=uulm-in-link}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                          Additional Colors                            %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\definecolor{red}{HTML}{a51d2d}
+\definecolor{green}{HTML}{26a269}
+\definecolor{blue}{HTML}{1a5fb4}
+\definecolor{yellow}{HTML}{f5c211}
+\definecolor{gray}{HTML}{c0bfbc}
+\definecolor{darkgray}{HTML}{77767b}
+\definecolor{lightgray}{HTML}{deddda}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                          Common Lengths                               %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newlength\@linewidth\@linewidth1px
+\newlength\@rounding\@rounding1mm
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                               TikZ                                    %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usetikzlibrary{shapes,arrows,arrows.meta,positioning,backgrounds}
+\tikzset{
+	lw/.style={line width=\@linewidth},
+	lcr/.style={line cap=round},
+	rnd/.style={rounded corners=\@rounding},
+	o/.style={remember picture,overlay},
+	squarenode/.style={rectangle, fill=white, draw=black, lw},
+	roundednode/.style={squarenode, rnd},
+	roundnode/.style={squarenode, circle},
+	pill/.style={squarenode, rounded rectangle},
+	arrow/.style={black,lw,-{Latex[round]},lcr,rnd},
+	textarrow/.style={arrow,darkgray,short=1mm,->,-{Kite[#1]}},
+	textarrow/.default=open,
+	short/.style n args={1}{shorten <=#1,shorten >=#1},
+	pipelinestep/.style={lw,rnd,shape=signal,signal from=west,signal pointer angle=130,minimum width=3cm,minimum height=17mm,draw=black,fill=uulm-akzent!10!white},
+}
+
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{background,main,foreground}
+
+\tikzset{%
+	on foreground layer/.style={%
+			execute at begin scope={%
+					\pgfonlayer{foreground}%
+					\let\tikz@options=\pgfutil@empty%
+					\tikzset{every on foreground layer/.try,#1}%
+					\tikz@options%
+				},
+			execute at end scope={\endpgfonlayer}
+		},
+	on layer/.code={%
+			\pgfonlayer{#1}\begingroup
+			\aftergroup\endpgfonlayer
+			\aftergroup\endgroup
+		},
+	node on layer/.code={%
+			\gdef\node@@on@layer{%
+				\setbox\tikz@tempbox=\hbox\bgroup\pgfonlayer{#1}\unhbox\tikz@tempbox\endpgfonlayer\egroup}
+			\aftergroup\node@on@layer
+		},
+}
+
+\def\node@on@layer{\aftergroup\node@@on@layer}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                              Listings                                 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\RequirePackage{listings}
+\RequirePackage{accsupp}
+\RequirePackage{lstautogobble}
+
+\lstdefinestyle{default}{
+	basicstyle=\fontsize{\f@size}{\f@baselineskip}\ttfamily\selectfont,
+	keywordstyle=\bfseries\color{@lst@keyword},
+	commentstyle=\itshape\color{darkgray},
+	stringstyle=\itshape\color{darkgray},
+	numbers=left,
+	breaklines=false,
+	keepspaces=true,
+	captionpos=b,
+	inputencoding=utf8,
+	literate={~}{\ttfamily$\sim$}{1} {ä}{{\"a}}1 {ö}{{\"o}}1 {ü}{{\"u}}1 {Ä}{{\"A}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1,
+	autogobble=true,
+	tabsize=2,
+	escapeinside={(*}{*)},
+	showtabs=true,
+	tab={\color{lightgray}\@lst@nocopy{\guilsinglright}\hfill},
+	numberstyle=\color{gray!70}\scriptsize\@lst@nocopy,
+	backgroundcolor=\color{@lst@background},
+	rulecolor=\color{@lst@rule},
+	framerule=\@linewidth,
+	frame=single,
+	prebreak=\rlap{\@lst@nocopy{$\hookleftarrow$}},
+	fontadjust=true,
+}
+\lstdefinestyle{inl}{
+	style=default,
+	keywordstyle=\color{@lst@keyword},
+	columns=fullflexible,
+}
+\lstdefinestyle{plain}{
+	style=default,
+	language=,
+	backgroundcolor=\color{white},
+	numbers=none,
+	frame=none,
+	tab={},
+}
+
+\def\@lst@nocopy#1{\BeginAccSupp{ActualText={}}#1\EndAccSupp{}}
+\if@nocolor
+	\colorlet{@lst@background}{white}
+	\colorlet{@lst@rule}{black}
+	\colorlet{@lst@keyword}{black}
+\else
+	\colorlet{@lst@background}{uulm-akzent!5!white}
+	\colorlet{@lst@rule}{@lst@background!70!black}
+	\colorlet{@lst@keyword}{uulm-in-link}
+\fi
+\lstset{style=default}
+
+\def\inlineblock#1{\tikz[anchor=base,baseline]\node[inner sep=0.1818em,rnd,fill=gray!15,anchor=base,baseline=] {#1};}
+\newcommand\code[2][]{\inlineblock{\lstinline[style=inl,language=#1]|#2|}}
+\newcommand\plaincode[2][]{\lstinline[style=inl,language=#1]|#2|}
+\def\codename#1{\textsc{#1}}
+\def\filename#1{\textsl{#1}}
+\def\lstoutput#1{\color{gray!80!black}#1}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                              Lists                                    %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\setlist[itemize,1]{label=$\bullet$}
+\setlist[description]{align=right,labelindent=-1.2ex,font=\normalfont\itshape,labelsep=\dimexpr-\itemindent+1.2ex\relax,leftmargin=0cm}
+
+\newlist{inlenum}{enumerate*}{1}
+\setlist[inlenum]{label=\emph{\roman*)},itemjoin={{, }},itemjoin*={{ und }}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                            Other Macros                               %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \link <display> to <url>;
+\def\link #1 to #2;{%
+	\def\reduline{\bgroup\markoverwith{\textcolor{uulm-in-link}{\rule[-0.2ex]{1pt}{0.08pt}}}\ULon}%
+	\reduline{\href{#2}{#1}}%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                           Fancy Underlines                            %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usetikzlibrary{tikzmark}
+\def\m#1{\tikzmark{#1}}
+
+\tikzset{ul/.style={#1,opacity=0.35,rounded corners=.17ex}}
+% \ul[<y shift>]{<color>}{<start>}{<end>}{<underline name>}
+% <start> and <end> are names created with \m{<name>}
+% <underline name> can later be referenced in tikzpictures and will point to the
+% center of the underline
+% There is also <underline name>_west and <underline name>_east which point to
+% the --- you guessed it --- eastern and western end of the underline
+%
+% This is \m{s}a nice\m{e} example
+% \ul{red}{s}{e}{u}
+% \begin{tikzpicture}[o] % o is relevant for "u" to be accessible
+%     \node at (u) {Hi!};
+% \end{tikzpicture}
+\newcommand\ul[5][0pt]{\begin{tikzpicture}[o]
+	\coordinate(#5_west) at ([yshift=#1-0.2ex]pic cs:#3);
+	\coordinate(#5_east) at ([yshift=#1+0.4ex]pic cs:#4);
+	\fill[ul=#2] (#5_west) rectangle node(#5){} (#5_east);
+\end{tikzpicture}}

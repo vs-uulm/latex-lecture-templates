@@ -1,0 +1,45 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                       Only internal stuff                             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def\@ensurehelper#1#2#3{%
+	\expandafter\def\csname @#1\endcsname{#3}%
+	\if\relax\detokenize{#2}\relax%
+		\expandafter\def\csname @short#1\endcsname{#3}%
+	\else%
+		\expandafter\def\csname @short#1\endcsname{#2}%
+	\fi%
+}
+
+% Example :)
+% \ensureinfocommand{name} will generate the following macros:
+% - \name
+% - \@name
+% - \@shortname
+% - \if@name ... \else ... \fi
+% \name is used to set the name (and short name) from outside the class: \name[Luke]{Lukas Pietzschmann}
+% \@name and \shortname are used to retrieve the previously set values from inside the class
+% \@name would expand to "Lukas Pietzschmann"
+% \@shortname would expand to "Luke"
+% If the user does not specify a short name (\name{Lukas Pietzschmann}), \shortname will simply expand to \@name
+\def\ensureinfo#1{%
+	\expandafter\newif\csname if@#1\endcsname\csname @#1false\endcsname%
+	\@ensurehelper{#1}{}{\@clserr{#1 required}{You can pass the value to the macro '#1'.}}%
+	\ifcsname#1\endcsname%
+		\expandafter\renewcommand\csname#1\endcsname[2][]{\csname @#1true\endcsname\@ensurehelper{#1}{##1}{##2}}%
+	\else%
+		\expandafter\newcommand\csname#1\endcsname[2][]{\csname @#1true\endcsname\@ensurehelper{#1}{##1}{##2}}%
+	\fi%
+}
+
+\def\pencolor{pencolor} % the macro will be expanded after we set the color
+\if@nocolor\colorlet{pencolor}{lightgray}\else\definecolor{pencolor}{RGB}{38,162,105}\fi
+\newsavebox\@penb
+\newcommand\pen@wdth{.8}
+\newcommand\pen@hght{0.3}
+\savebox\@penb{\begin{tikzpicture}
+	\draw[line width=1.5px,rounded corners=.5mm] (0.1,0) -- (\pen@wdth-0.2,0) -- (\pen@wdth,0.5*\pen@hght) -- (\pen@wdth-0.2,\pen@hght) -- (0.1,\pen@hght);
+	\draw[fill=\pencolor,line width=1.5px,rounded corners=.5mm] (0.2,0) -- (0,0) -- (0,\pen@hght) -- (0.2,\pen@hght) -- cycle;
+	\draw[line width=1.5px] (\pen@wdth-0.075,\pen@hght-0.1) -- (\pen@wdth-0.075,0.1);
+\end{tikzpicture}}
+\def\@pen{\normalsize\resizebox{!}{1ex}{\usebox\@penb}}

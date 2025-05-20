@@ -1,0 +1,13 @@
+% If you still use the old subtask environment, this definition will kindly
+% remind you that there's something newer :)
+
+\newcounter{subtask}[task]
+\newenvironment{subtask}{
+    \@clswrn{You're still using the old subtask environment. Consider using "subtasks" instead.}
+    \addtocounter{subtask}{1}
+    \begin{minipage}[t]{0.03\textwidth}
+        \alph{subtask})
+    \end{minipage}
+    \begin{minipage}[t]{0.97\textwidth}
+    \setlength{\parskip}{10pt}
+}{\end{minipage}}

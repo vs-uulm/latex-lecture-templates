@@ -1,50 +1,54 @@
-\documentclass{uulm-assignment}
-\setboolean{showsolutions}{false} % Compile with or without answers
+\documentclass[english,solution]{uulm-assignment}
 
-% \usepackage[utf-8]{inputenc}
-\usepackage{subfigure}
+\usepackage{amsmath}
 
-\usepackage{amssymb}
-\usepackage{hyperref}
-\usepackage{tikz}
+\course[Good Course]{The best course the world has ever seen}
+\faculty{Institute of Distributed Systems}
+\supervisor{Susie Sunday}
+\semester[ST25]{Summer Term 2025}
+\assignmenttype{Sheet}
+\assignmentno2
 
-\faculty{Institut für Verteilte Systeme}
-\course{Mobilkommunikation}
-\semester{Wintersemester 2012/2013}
-\supervisor{Stefan Dietzel,
-	Dominik Lang,
-	Thomas Lukaseder,
-	Prof. Dr. Frank Kargl}
- 
-\assignmentdeadline{03.02.2013, 23:59}	 % Abgabedatum: XYZ
-%\assignmentduration{15 Minuten} % Bearbeitungsdauer: XYZ
-% \studentdata	              % Name & Matrikelnummer Feld
+\publishdate\today
+\deadline\today
 
-\assignmenttype{Übungsblatt}
-\assignmentno{6}
-\title{MANET-Simulation}
+\title{A nice and easy exercise sheet}
 
 \begin{document}
-\maketitle
+	\maketitle
 
-\task{Aufgabe}{JiST/SWANS-Umgebung}{4}
+	\task*{Introduction}
+	Don't worry, you don't have to do anything here. This is just an example exercise
+	sheet to show off the assignment class.
 
-Laden Sie die JiST/SWANS-Distribution aus ILIAS herunter. Übersetzen Sie die Sourcen mittels Ant: \verb|ant build|. Als eines der Beispielprotokolle enthält die Distribution eine Implementierung des AODV-Protokolls, welches Sie auch in der Vorlesung kennen gelernt haben.
+	\task[4]{Linear Equations}
+	Solve the following linear equations:
+	\begin{subtasks}
+		\item \(2x + 3 = 7\) \inlinesolution{\(x = 2\)}
+		\optitem \(4y - 5 = 11\)
+			\begin{solution}
+				This was a bit harder, but I hope you got it! Instead of the solution,
+				here's a joke:
+				Why do programmers always mix up Halloween and Christmas? Because Oct 31
+				== Dec 25! Ha ha ha ha ha!
+			\end{solution}
+	\end{subtasks}
 
-\begin{solution}
-Beispiel-Lösung für Übungsblatt. Wird nicht angezeigt, wenn \verb|showsolutions=false|
-\end{solution}
+	\task{Text Task}
+	In this task, you have to write a short text about your favorite programming
+	language.
+	\begin{solution}
+		Without a doubt, my favorite programming language is \link  Die Deutsche
+		Programmiersprache to https://ddp.im;. Here's a short example:
+		\begin{lstlisting}
+			Binde "Duden/Ausgabe" ein.
 
-\begin{solution}[5]
-Beispiel-Lösung für Quiz. Wird mit 5 Linien angezeigt, wenn \verb|showsolutions=false|
-\end{solution}
-
-\begin{solution}[5][squared]
-Beispiel-Lösung für Quiz. Wird mit 5 Reihen Karos angezeigt, wenn \verb|showsolutions=false|
-\end{solution}
-
-\begin{solution}[5][blank]
-Beispiel-Lösung für Quiz. Wird mit 5 Reihen Leerraum angezeigt, wenn \verb|showsolutions=false|
-\end{solution}
+			Die Funktion f mit dem Parameter n vom Typ Zahl, gibt eine Zahl zurück, macht:
+				Wenn n kleiner als, oder 1 ist, gib n zurück.
+				Gib die (n minus 2). fib plus die (n minus 1). fib zurück.
+		\end{lstlisting}
+		It can be called like \code{Schreibe (die 6. fib)}. DDP is \m{s}soooo\m{e} nice!
+		\ul{uulm-in}{s}{e}{}
+	\end{solution}
 
 \end{document}
